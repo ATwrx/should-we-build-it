@@ -11,28 +11,28 @@ To get contribute:
 
 First install yarn. 
 
-####To see if you already have yarn installed####
+####To see if you already have yarn installed
 
 `yarn -v`
 
 If you get a version number then it's already installed.
 
-####Install yarn####
+####Install yarn
 
 `npm i -g yarn`
 
-####Once yarn is installed####
+####Once yarn is installed
 
 `git clone https://github.com/ATwrx/should-we-build-it`
 `cd should-we-build-it`
 `yarn install` 
 
-####You're all set####
+####You're all set
 
 `yarn start` 
 
 This will start your dev server. 
 
 
-### Better Documention in the future.... ###
+### Better Documention in the future.... 
 
