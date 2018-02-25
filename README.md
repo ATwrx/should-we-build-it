@@ -10,12 +10,15 @@ To get started:
 ---------------
 
 First install yarn. 
-`npm i -g yarn'
+
+`npm i -g yarn`
 
 Then 
+
 `yarn install` 
 
 Lastly
+
 `yarn start` 
 
 This will start your dev server. 
