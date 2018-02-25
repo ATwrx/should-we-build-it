@@ -13,27 +13,31 @@ First install yarn.
 
 #### To see if you already have yarn installed
 
-`yarn -v`
+```
+yarn -v
+```
 
 If you get a version number then it's already installed.
 
 #### Install yarn
 
-`npm i -g yarn`
+```
+npm i -g yarn
+```
 
 #### Once yarn is installed
 
 ```
 git clone https://github.com/ATwrx/should-we-build-it
-
 cd should-we-build-it
-
 yarn install
 ```
 
 #### You're all set
 
-`yarn start` 
+```
+yarn start 
+```
 
 This will start your dev server. 
 
