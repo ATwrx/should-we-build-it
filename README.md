@@ -6,18 +6,28 @@ This app was created to answer the age old question of "should I build it?".
 The goal of this project is to give developers a space to share idea's, seek contributers, and just see if the project is even worth the effort. 
 
 
-To get started: 
+To get contribute: 
 ---------------
 
 First install yarn. 
 
+####To see if you already have yarn installed####
+
+`yarn -v`
+
+If you get a version number then it's already installed.
+
+####Install yarn####
+
 `npm i -g yarn`
 
-Then 
+####Once yarn is installed####
 
+`git clone https://github.com/ATwrx/should-we-build-it`
+`cd should-we-build-it`
 `yarn install` 
 
-Lastly
+####You're all set####
 
 `yarn start` 
 
