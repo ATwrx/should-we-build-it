@@ -23,11 +23,13 @@ If you get a version number then it's already installed.
 
 #### Once yarn is installed
 
-```git clone https://github.com/ATwrx/should-we-build-it
+```
+git clone https://github.com/ATwrx/should-we-build-it
 
 cd should-we-build-it
 
-yarn install```
+yarn install
+```
 
 #### You're all set
 
