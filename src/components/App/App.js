@@ -11,20 +11,19 @@ class App extends Component {
     }
   }
 
-
   componentWillMount(){
     this.setState({projects: [
       {
-        title: 'Business Website',
-        category: 'Web Design'
+        title: 'Should We Build It',
+        category: 'Web Site'
       },
       {
-        title: 'Social App',
-        category: 'Mobile Development'
+        title: 'Social App Example',
+        category: 'Mobile App'
       },
       {
-        title: 'Ecommerce Shopping Cart',
-        category: 'Web Development'
+        title: 'Shopping App Example',
+        category: 'Web App'
       }
     ]});
   }

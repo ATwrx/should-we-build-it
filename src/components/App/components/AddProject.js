@@ -6,10 +6,10 @@ class AddProject extends Component {
     this.state = {
     newProject: {}
     }
-  };
+  }; 
 
   static defaultProps = {
-    categories: ['Web Design', 'Web Development', 'Mobile Development']
+    categories: ['Web Site', 'Web App', 'Mobile App']
   }
 
   handleSubmit(e){
@@ -32,8 +32,8 @@ class AddProject extends Component {
     })
     return (
     <div>
-      <h3>Add Project</h3>
-    <form onSubmit={this.handleSubmit.bind(this)}>
+      <h3>Add a New Project</h3>
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <div>
           <label>Title</label><br />
           <input type="text" ref="title" />
