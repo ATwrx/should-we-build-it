@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'material-ui/Button';
 
 class AddProject extends Component {
   constructor(){
@@ -35,16 +36,16 @@ class AddProject extends Component {
       <h3>Add a New Project</h3>
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div>
-          <label>Title</label><br />
+          <label>Title</label>
           <input type="text" ref="title" />
         </div>
         <div>
-          <label>Category</label><br />
+          <label>Category</label>
           <select ref="category">
               {categoryOptions}
           </select>
         </div>
-        <input type="submit" value="Submit" />
+        <Button variant='raised' label='submit' type='submit' color='primary'>Submit</Button>
       </form>
     </div>
         );
