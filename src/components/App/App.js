@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Projects from './components/Projects';
 import AddProject from './components/AddProject';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TopBar from "../../default-components/TopBar"
 import './App.css';
+import Reboot from 'material-ui/Reboot';
 
 class App extends Component {
   constructor() {
@@ -38,6 +40,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Reboot />
+        <TopBar />
         <MuiThemeProvider>
           <AddProject addProject={this.handleAddProject.bind(this)} />
           <Projects projects={this.state.projects}/>
