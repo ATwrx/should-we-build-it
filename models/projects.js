@@ -65,13 +65,14 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
   }
- 	// Projects.associate = function(models) {
-  //   // Associating user with comments
-  //   // When a user is deleted, also delete any associated comments
+  //   Projects.associate = function(models) {
+  //   // Associating users with votes
+  //   // When an user is deleted, also delete any associated votes
   //   Projects.hasMany(models.Comments, {
   //     onDelete: "cascade"
   //   });
   // };
+
  
     return Projects;
  

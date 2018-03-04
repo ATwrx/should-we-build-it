@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
              defaultValue: DataTypes.NOW,
              allowNull: false,
 
-        }, 
+         },
 
         user_id: {
         
@@ -36,7 +36,6 @@ module.exports = function(sequelize, DataTypes) {
 
        Comments.associate = function (models) {
     models.Comments.belongsTo(models.Users, {
-      onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
@@ -45,7 +44,6 @@ module.exports = function(sequelize, DataTypes) {
 
         Comments.associate = function (models) {
     models.Comments.belongsTo(models.Projects, {
-      onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }
