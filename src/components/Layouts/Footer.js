@@ -11,7 +11,7 @@ const styles = {
 export default props =>
 <Paper style={styles} className="footer" position="static">
 <Tabs
-  value={2}
+  value={0}
   onChange={this.handleChange}
   indicatorColor="primary"
   textColor="primary"
