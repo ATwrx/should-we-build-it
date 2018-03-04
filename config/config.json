@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "notsaying",
+    "password": "5qlp5word",
     "database": "shouldWeBuildIt_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
