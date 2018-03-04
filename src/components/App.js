@@ -17,14 +17,16 @@ class App extends Component {
   
   render() {
     return (
-      <MuiThemeProvider>
-          <Reboot />
-        <div className="App" style={style}>
-          <Header />
-          <NewProject />
-          <Footer />
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <Reboot />
+        <MuiThemeProvider>
+          <div className="App" style={style}>
+            <Header />
+            <NewProject />
+            <Footer />
+          </div>
+        </MuiThemeProvider>
+      </div>
     );
   }
 }
