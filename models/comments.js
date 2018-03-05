@@ -17,13 +17,18 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             validate: { len: [1] }
         },
-
+       
         createdAt: {
-             type: DataTypes.DATE,
-             defaultValue: DataTypes.NOW,
-             allowNull: false,
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('now()'),
+            allowNull: false
+        },
 
-         },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('now()'),
+            allowNull: false
+        },
 
         user_id: {
         

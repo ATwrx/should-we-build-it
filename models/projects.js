@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
         createdAt: { 
 
         	type: DataTypes.DATE,
-        	defaultValue: DataTypes.NOW, 
+        	defaultValue: sequelize.literal('now()'), 
         	allowNull: false 
 
         },
@@ -48,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
         updatedAt: { 
 
         	type: DataTypes.DATE,
-        	defaultValue: DataTypes.NOW, 
+        	defaultValue: sequelize.literal('now()'), 
         	allowNull: false 
 
         }

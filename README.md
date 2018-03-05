@@ -44,3 +44,4 @@ This will start your dev server.
 
 ### Better Documention in the future.... 
 
+if using sequelize then node server.js followed by $ node_modules/.bin/sequelize db:seed:all will create the db and seed some basic data

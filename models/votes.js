@@ -13,6 +13,21 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.ENUM('up', 'down'),
             allowNull: false,
             notEmpty: true
+        },
+
+        createdAt: {
+          type: DataTypes.DATE,
+          defaultValue: sequelize.literal('now()'), 
+          allowNull: false 
+
+        },
+
+        updatedAt: { 
+
+          type: DataTypes.DATE,
+          defaultValue: sequelize.literal('now()'), 
+          allowNull: false 
+
         }
 
 

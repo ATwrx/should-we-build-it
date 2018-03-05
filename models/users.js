@@ -22,7 +22,8 @@ var Users = sequelize.define('Users', {
             allowNull: false
         },
         username: {
-            type: DataTypes.TEXT
+            type: DataTypes.TEXT,
+            allowNull: false
         },
  
         email: {
@@ -34,6 +35,18 @@ var Users = sequelize.define('Users', {
  
         password: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('now()'),
+            allowNull: false
+        },
+
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('now()'),
             allowNull: false
         }
  
