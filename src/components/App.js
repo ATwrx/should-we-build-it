@@ -5,7 +5,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Header, Footer, NewProject } from './Layouts'
 
 const style = {
-  height: '99%',
   minHeight: "100vh",
   fontFamily: 'Roboto, sans-serif',
   display: 'flex',
