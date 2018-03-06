@@ -12,15 +12,15 @@ const styles = {
     marginRight: 20,
    },
 }
-
+// <IconButton  className="menuButton" color="inherit" aria-label="Menu">
+    //     <MenuIcon style={styles.menuButton} />
+    //     </IconButton>
+     
 
 export default props =>
 <AppBar style={styles.root} title="Should We Build It ?" position="static">
     <Toolbar>
-    <IconButton  className="menuButton" color="inherit" aria-label="Menu">
-        <MenuIcon style={styles.menuButton} />
-        </IconButton>
-        <Typography variant="title" color="inherit" style={styles.flex}>
+      <Typography variant="title" color="inherit" style={styles.flex}>
             Should We Build It?
         </Typography>
         <Button color="inherit">Login</Button>

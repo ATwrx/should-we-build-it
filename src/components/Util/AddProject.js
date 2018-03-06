@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import TextField from 'material-ui/TextField';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+});
 
 class AddProject extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-    newProject: {}
+      title: '',
+      category: '',
+      // user: '',
+      desc: '',
+      // contactEmail: ''
     }
   }; 
-
+  
   static defaultProps = {
     categories: ['Web Site', 'Web App', 'Mobile App']
   }
@@ -19,8 +42,11 @@ class AddProject extends Component {
     } else {
       this.setState({newProject:{
         title: this.refs.title.value,
-        category: this.refs.category.value
-      }}, function(){
+        category: this.refs.category.value,
+        lang: this.refs.lang.value,
+        desc : this.refs.desc.value,
+        contactEmail: this.refs.contactEmail.value
+      }}, function() {
         this.props.addProject(this.state.newProject);
       });
     }
@@ -28,27 +54,28 @@ class AddProject extends Component {
   }
 
   render() {
-    let categoryOptions = this.props.categories.map(category => {
+    const { classes } = this.props;
+    const categoryOptions = this.props.categories.map(category => {
       return <option key={category} value={category}>{category}</option>
     })
     return (
     <div>
       <h3>Add a New Project</h3>
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <div>
-          <label>Title</label>
-          <input type="text" ref="title" />
-        </div>
-        <div>
-          <label>Language</label>
-          <input type="text" ref="lang" />
-        </div>
-        <div>
-          <label>Category</label>
-          <select ref="category">
-              {categoryOptions}
-          </select>
-        </div>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <TextField
+            id="title"
+            label="Project Title"
+            className={classes.TextField}
+            value={this.state.name}
+            margin="normal"
+          /> 
+          <TextField
+            id="desc"
+            label="Project Description"
+            defaultValue="Keep it simple, stupid"
+            className={classes.TextField}
+          />
+          <br />
         <Button variant='raised' label='submit' type='submit' color='primary'>Submit</Button>
       </form>
     </div>
@@ -56,4 +83,8 @@ class AddProject extends Component {
   }
 }
 
-export default AddProject;
+AddProject.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(AddProject);

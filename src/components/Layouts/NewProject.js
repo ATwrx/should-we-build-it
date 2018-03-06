@@ -24,21 +24,25 @@ class NewProject extends Component {
 
  
   componentWillMount(){
+    // PUT QUERY HERE
      this.setState({projects: [
        {
          title: 'Should We Build It',
         category: 'Web Site',
-        lang: 'Javascript'
+        lang: 'Javascript',
+        desc: 'A small description goes here.',
       },
       {
         title: 'Social App Example',
         category: 'Mobile App',
-        lang: 'Javascript'
+        lang: 'Javascript',
+        desc: 'A small description goes here.',
       },
       {
         title: 'Shopping App Example',
         category: 'Web App',
         lang: 'Javascript',
+        desc: 'A small description goes here.',
       }
     ]});
   }
@@ -54,13 +58,13 @@ class NewProject extends Component {
    <Grid container>
         <Grid item sm>
             <Paper style={styles.Paper}>
-                <AddProject addProject={this.handleAddProject.bind(this)} />
+                <AddProject roject addProject={this.handleAddProject.bind(this)} />
             </Paper>
         </Grid>
         <Grid item sm>
-            <Paper style={styles.Paper}>
+            <div style={styles.Paper}>
                 <Projects projects={this.state.projects}/>
-            </Paper>
+            </div>
         </Grid>
     </Grid>
       )}
