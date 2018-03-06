@@ -1,20 +1,12 @@
 import React from 'react'; 
-import { AppBar, Toolbar, Typography, IconButton } from 'material-ui';
-import MenuIcon from 'material-ui-icons/Menu';
+import { AppBar, Toolbar, Typography } from 'material-ui';
 import Button from 'material-ui/Button';
 
 const styles = {
    flex: {
        flex: 1,
    },
-   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-   },
 }
-// <IconButton  className="menuButton" color="inherit" aria-label="Menu">
-    //     <MenuIcon style={styles.menuButton} />
-    //     </IconButton>
      
 
 export default props =>

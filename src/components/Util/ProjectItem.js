@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Paper, Typography, RaisedButton } from 'material-ui';
+import { Paper, Typography } from 'material-ui';
 
 const styles = {
   ProjectItem: {

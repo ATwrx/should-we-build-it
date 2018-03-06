@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
+// import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 
 const styles = theme => ({
@@ -21,8 +21,8 @@ const styles = theme => ({
 });
 
 class AddProject extends Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.state = {
       title: '',
       category: '',
@@ -55,9 +55,9 @@ class AddProject extends Component {
 
   render() {
     const { classes } = this.props;
-    const categoryOptions = this.props.categories.map(category => {
-      return <option key={category} value={category}>{category}</option>
-    })
+    // const categoryOptions = this.props.categories.map(category => {
+    //   return <option key={category} value={category}>{category}</option>
+    // })
     return (
     <div>
       <h3>Add a New Project</h3>
