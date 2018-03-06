@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, { Component } from 'react' 
 import { Tabs, Paper } from 'material-ui';
 import { Tab } from 'material-ui/Tabs';
 
@@ -8,17 +8,32 @@ const styles = {
     bottom: 0,
     width: "100%"
 }
-export default props =>
-<Paper style={styles} className="footer" position="static">
-<Tabs
-  value={0}
-  onChange={this.handleChange}
-  indicatorColor="primary"
-  textColor="primary"
-  centered
->
-  <Tab label="My Projects" />
-  <Tab label="Browse Projects" />
-  <Tab label="My Profile" />
-</Tabs>
-</Paper>
+class Footer extends Component {
+ state = {
+   tabValue : 0,
+ } 
+
+  handleChange = (event, tabValue) => {
+    this.setState({ tabValue });
+  };
+  
+  render() {
+    return (
+    <Paper style={styles} className="footer" position="static">
+      <Tabs
+        value={this.state.tabValue}
+        onChange={this.handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="My Projects" />
+        <Tab label="Browse Projects" />
+        <Tab label="My Profile" />
+      </Tabs>
+    </Paper>
+    )
+  }
+}
+
+export default Footer 

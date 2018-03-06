@@ -21,8 +21,8 @@ const styles = theme => ({
 });
 
 class AddProject extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       title: '',
       category: '',
