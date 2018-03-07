@@ -81,6 +81,20 @@
     	});
   };
 
+  		function editComment(id) {
+
+
+  			var newComment = {  
+  				comment: newComment
+					};
+
+					db.Comments.update(newComment, {where: { id: id } })  
+				.then(function(res) {
+     	
+    		readComments(projectId);
+    	});
+  };
+
 
   		
 
@@ -89,3 +103,4 @@
 	// Comments(1);
 	// addProject();
 	// deleteComment(5);
+	// editComment();
