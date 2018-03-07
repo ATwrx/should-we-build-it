@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
+import { NewProject } from '../Util'
 
 function TabContainer(props) {
   return (
@@ -38,7 +39,9 @@ class  SimpleTabs extends Component {
 
     return (
         <div className={classes.root}>
-            {this.props.tabValue === 0 && <TabContainer>Item One</TabContainer>}
+            {this.props.tabValue === 0 && <TabContainer>
+              <NewProject />
+            </TabContainer>}
             {this.props.tabValue === 1 && <TabContainer>Item Two</TabContainer>}
             {this.props.tabValue === 2 && <TabContainer>Item Three</TabContainer>}
         </div>
