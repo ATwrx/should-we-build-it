@@ -3,12 +3,10 @@
 	var sequelize = require('Sequelize');
 	var bodyParser = require("body-parser");
 
-		// db.Projects.findAll({}).then(function(data) {
+		
 
 
-		// 	console.log(data);
-
-		// });
+	function allProjects() { //brings back all the projects
 
 		db.Projects.findAll({}).then(function(res){
 
@@ -17,43 +15,64 @@
 			for (let i=0; i < res.length; i++) {
 
 				resArr.push(res[i].dataValues);
-	
-
-
-
 		}
 
 			console.log(resArr);
-
-
-
 	});
+	};
+
+		function readComments(projectId) { //brings back comments assigned by projectID
 
 
+		db.Comments.findAll({
 
-	
+				where: {
 
-//   router.get('/index', function(req, res) {
-//     // findAll returns all entries for a table when used with no options
-//     burgerdb.burgers.findAll({}).then(function(data) {
-//       // access to the burgers as an argument inside of the callback function
-//       var hbsObject = { burgers: data };
-//     //render via handlebars
-//     res.render('index', hbsObject);
-//   });
-// });
+					ProjectID: projectId
+				}
+
+		}).then(function(res){
+
+			var resArr = [];
+
+			for (let i=0; i < res.length; i++) {
+
+				resArr.push(res[i].dataValues);
+		}
+
+			console.log(resArr);
+		});
+		};
 
 
-// getAllProjects();
+				function addProject(){
 
-// var Op = Sequelize.Op;
+					//---------------------------------------//
+					//
+					// var project_name = "cheese app";
+					// var project_desc = "to use crowdsourcing to locate the best cheese in town";
+					// var project_lang = "PHP";
+					// var category = 'social media'  || 'web app' || 'website'|| 'mobile app'
+					// var UserId = "5";
+					//----------------------------------------//
 
-// db.Projects.findAll({}).then(console.log(data));
+			db.Projects.create({
+      					project_name: project_name,
+      					project_desc: project_desc,
+					    project_lang: project_lang,
+					    category: category,
+					    UserId: UserId
+    })
+    .then(function(res) {
+     	
+    		allProjects();
+    });
+  };
 
-// SELECT * FROM post WHERE authorId = 2
 
-// db.Projects.findAll({}).then(function(projects) {
+  		
 
-// 	console.log(projects);
-//   // Send array to view
-// });
+ 
+	// allProjects();
+	// Comments(1);
+	// addProject();

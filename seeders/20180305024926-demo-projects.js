@@ -18,7 +18,7 @@ module.exports = {
         UserId: '1'
       },{
          project_name: 'Trip tool / Travel wallet',
-        project_desc: 'Carry tickets, recommendations and useful information with a new travevl app',
+        project_desc: 'Carry tickets, recommendations and useful information with a new travel app',
         project_lang: 'Node.js',
         category: 'mobile app',
         UserId: '3'
