@@ -6,15 +6,16 @@ class Profile extends Component {
 
     render() {
         return (
-            <Paper className='Profile' ints={this.props.u_ints} projectCount={this.u_projectCount}>
-              <Typography variant="display3"  >
+            <Paper className='Profile'>
+              <Typography variant="headline" bottomGutter >
               Welcome back, {this.props.name}
               </Typography>
-              <Typography variant="display4" >
-                Hey there {this.props.name}
+              <br />
+              <Typography variant="body1" >
+                My intrests include {this.props.ints[0]} and {this.props.ints[1]}
               </Typography>
-              <Typography variant="display4" >
-                Hey there {this.props.name}
+              <Typography variant="body2" >
+                Total projects questioned : {this.props.projectCount}
               </Typography>
             </Paper>
         )

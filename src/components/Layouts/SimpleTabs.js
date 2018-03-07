@@ -73,7 +73,7 @@ class  SimpleTabs extends Component {
               <Projects projects={this.state.projects}/>
             </TabContainer>}
             {this.props.tabValue === 2 && <TabContainer>
-              <Profile name={this.state.u.name}/>
+              <Profile name={this.state.u.name} ints={this.state.u.ints} projectCount={this.state.u.projectCount}/>
             </TabContainer>}
         </div>
     )
