@@ -24,21 +24,23 @@ const styles = theme => ({
 });
 
 class  SimpleTabs extends Component {
-  state = { 
-    tabValue : 0, 
-  }
-  
- 
+ constructor(props) {
+   super(props);
+   this.state = { tabValue: props.tabValue }
+ }
+
+  handleChange = (event, tabValue) => {
+    this.setState({tabValue});
+  };
 
   render() {
     const { classes } = this.props;
-    const { tabValue } = this.state.tabValue;
 
     return (
         <div className={classes.root}>
-            {tabValue === 0 && <TabContainer>Item One</TabContainer>}
-            {tabValue === 1 && <TabContainer>Item Two</TabContainer>}
-            {tabValue === 2 && <TabContainer>Item Three</TabContainer>}
+            {this.props.tabValue === 0 && <TabContainer>Item One</TabContainer>}
+            {this.props.tabValue === 1 && <TabContainer>Item Two</TabContainer>}
+            {this.props.tabValue === 2 && <TabContainer>Item Three</TabContainer>}
         </div>
     )
   }

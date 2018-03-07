@@ -1,6 +1,7 @@
-import React, { Component } from 'react' 
+import React, { Component } from 'react'
 import { Tabs, Paper } from 'material-ui';
 import { Tab } from 'material-ui/Tabs';
+import { SimpleTabs } from '../Layouts';
 
 const styles = {
     position: "fixed",
@@ -9,31 +10,35 @@ const styles = {
     width: "100%"
 }
 class Footer extends Component {
- state = {
-   tabValue : 0,
- } 
-
-  handleChange = (event, tabValue) => {
-    this.setState({ tabValue });
-  };
-  
+  constructor(props){
+    super(props)
+    this.state ={
+      tabValue: this.props.tabValue
+    }
+  }
+ handleChange = (event, tabValue) => {
+   this.setState({tabValue: tabValue})
+ }
   render() {
     return (
-    <Paper style={styles} className="footer" position="static">
-      <Tabs
-        value={this.state.tabValue}
-        onChange={this.handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
+    <div className="mainBody" >
+      <SimpleTabs  tabValue={this.state.tabValue} />
+      <Paper style={styles} className="footer" position="static">
+        <Tabs
+          value={this.state.tabValue}
+          onChange={this.handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
         <Tab label="My Projects" />
-        <Tab label="Browse Projects" />
-        <Tab label="My Profile" />
+        <Tab label="Browse Projects"  />
+        <Tab label="My Profile"  />
       </Tabs>
     </Paper>
+  </div>
     )
   }
 }
 
-export default Footer 
+export default Footer
