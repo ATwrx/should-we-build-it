@@ -1,60 +1,59 @@
-// Create routes
-var express = require('express');
-var router = express.Router();
-var swbidb = require('../models');
-
-// ----------------------------------------------------
-// Index Redirect
-router.get('/', function (req, res) {
-  res.redirect('/index');
-});
-
-
-  //bring all the projects into the index page
-
-  router.get('/index', function(req, res) {
-    // findAll returns all entries for a table when used with no options
-    swbidb.Comments.findAll({}).then(function(data) {
-      // access to the burgers as an argument inside of the callback function
-      var hbsObject = { burgers: data }; //needs pointing to whichever page
-    //render via handlebars
-    res.render('index', hbsObject);
-  });
-});
-
-
-//create a new burger
-
-  router.post('/project/create', function(req, res) {
  
-    swbidb.Projects.create({
-        project_name: $("#projectname").val().trim(),
-        project_desc: $("#projectdesc").val().trim(),
-        project_lang: $("#projectlang").val().trim(),
-        category: $("#category").val().trim(),
-        UserId: // how to source and link this
-    }).then(function(data) {
+	var db = require('../models');
+	var sequelize = require('Sequelize');
+	var bodyParser = require("body-parser");
 
-      res.redirect('/index');
-    });
-  });
-      
-
-  router.post('/burger/eat/:id', function( req, res ) {
+		// db.Projects.findAll({}).then(function(data) {
 
 
-swbidb.burgers.update({devoured: true},
-        {where: {id: req.params.id}})
-        .then(function (data) {
-            res.redirect('/index');;
+		// 	console.log(data);
 
-          });
-      });
+		// });
+
+		db.Projects.findAll({}).then(function(res){
+
+			var resArr = [];
+
+			for (let i=0; i < res.length; i++) {
+
+				resArr.push(res[i].dataValues);
+	
 
 
 
-// ----------------------------------------------------
+		}
+
+			console.log(resArr);
 
 
-// Export routes
-// module.exports = router;
+
+	});
+
+
+
+	
+
+//   router.get('/index', function(req, res) {
+//     // findAll returns all entries for a table when used with no options
+//     burgerdb.burgers.findAll({}).then(function(data) {
+//       // access to the burgers as an argument inside of the callback function
+//       var hbsObject = { burgers: data };
+//     //render via handlebars
+//     res.render('index', hbsObject);
+//   });
+// });
+
+
+// getAllProjects();
+
+// var Op = Sequelize.Op;
+
+// db.Projects.findAll({}).then(console.log(data));
+
+// SELECT * FROM post WHERE authorId = 2
+
+// db.Projects.findAll({}).then(function(projects) {
+
+// 	console.log(projects);
+//   // Send array to view
+// });
