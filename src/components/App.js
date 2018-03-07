@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Reboot from 'material-ui/Reboot';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Header, Footer} from './Layouts'
+import { Header, Body} from './Layouts'
 
 const style = {
   minHeight: "100vh",
@@ -32,7 +32,7 @@ class App extends Component {
         <MuiThemeProvider>
           <div className="App" style={style}>
             <Header />
-            <Footer handleChange={this.handleChange.bind(this)} tabValue={this.state.tabValue} />
+            <Body handleChange={this.handleChange.bind(this)} tabValue={this.state.tabValue} />
           </div>
         </MuiThemeProvider>
       </div>
