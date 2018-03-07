@@ -70,9 +70,37 @@
   };
 
 
+  			function deleteComment(id) {
+
+  				db.Comments.destroy({  
+  				where: { id: id }
+			})
+				.then(function(res) {
+     	
+    		readComments(projectId);
+    	});
+  };
+
+  		function editComment(id) {
+
+
+  			var newComment = {  
+  				comment: newComment
+					};
+
+					db.Comments.update(newComment, {where: { id: id } })  
+				.then(function(res) {
+     	
+    		readComments(projectId);
+    	});
+  };
+
+
   		
 
  
 	// allProjects();
 	// Comments(1);
 	// addProject();
+	// deleteComment(5);
+	// editComment();
