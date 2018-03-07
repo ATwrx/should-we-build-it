@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
-import { NewProject } from '../Util'
+import { NewProject, Projects } from '../Util'
+import { Profile } from '../Layouts'
 
 function TabContainer(props) {
   return (
@@ -20,7 +21,6 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     marginTop: theme.spacing.unit * 3,
-    backgroundColor: theme.palette.background.paper,
   },
 });
 
@@ -29,7 +29,34 @@ class  SimpleTabs extends Component {
    super(props);
    this.state = { tabValue: props.tabValue }
  }
-
+  componentWillMount(){
+    // PUT QUERY HERE
+     this.setState({projects: [
+       {
+         title: 'Should We Build It',
+        category: 'Web Site',
+        lang: 'Javascript',
+        desc: 'A small description goes here.',
+      },
+      {
+        title: 'Social App Example',
+        category: 'Mobile App',
+        lang: 'Javascript',
+        desc: 'A small description goes here.',
+      },
+      {
+        title: 'Shopping App Example',
+        category: 'Web App',
+        lang: 'Javascript',
+        desc: 'A small description goes here.',
+      }
+    ], u: {
+      name : 'Example Man',
+      ints : ['Golfing', 'Acting Like I Know What I\'m Doing'],
+      projectCount : 3
+    }}
+   );
+  }
   handleChange = (event, tabValue) => {
     this.setState({tabValue});
   };
@@ -40,10 +67,14 @@ class  SimpleTabs extends Component {
     return (
         <div className={classes.root}>
             {this.props.tabValue === 0 && <TabContainer>
-              <NewProject />
+              <NewProject projects={this.state.projects}/>
             </TabContainer>}
-            {this.props.tabValue === 1 && <TabContainer>Item Two</TabContainer>}
-            {this.props.tabValue === 2 && <TabContainer>Item Three</TabContainer>}
+            {this.props.tabValue === 1 && <TabContainer>
+              <Projects projects={this.state.projects}/>
+            </TabContainer>}
+            {this.props.tabValue === 2 && <TabContainer>
+              <Profile name={this.state.u.name}/>
+            </TabContainer>}
         </div>
     )
   }

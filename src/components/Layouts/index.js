@@ -4,5 +4,5 @@ import Profile from './Profile'
 import SimpleTabs from './SimpleTabs'
 
 export {
-    Header, Body,  Profile, SimpleTabs
+    Header, Body,  Profile, SimpleTabs,
 }

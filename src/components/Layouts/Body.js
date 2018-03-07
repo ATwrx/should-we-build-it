@@ -9,7 +9,7 @@ const styles = {
     bottom: 0,
     width: "100%"
 }
-class Footer extends Component {
+class Body extends Component {
   constructor(props){
     super(props)
     this.state ={
@@ -41,4 +41,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer
+export default Body

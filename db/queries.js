@@ -99,7 +99,7 @@
   		
 
  
-	// allProjects();
+ allProjects();
 	// Comments(1);
 	// addProject();
 	// deleteComment(5);
