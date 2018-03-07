@@ -70,9 +70,22 @@
   };
 
 
+  			function deleteComment(id) {
+
+  				db.Comments.destroy({  
+  				where: { id: id }
+			})
+				.then(function(res) {
+     	
+    		readComments(projectId);
+    	});
+  };
+
+
   		
 
  
 	// allProjects();
 	// Comments(1);
 	// addProject();
+	// deleteComment(5);
