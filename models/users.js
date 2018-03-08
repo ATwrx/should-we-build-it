@@ -23,7 +23,8 @@ var Users = sequelize.define('Users', {
         },
         username: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            unique: true //changes to only allow unqiue usernames
         },
  
         email: {
