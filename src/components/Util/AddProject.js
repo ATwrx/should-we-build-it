@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-// import MenuItem from 'material-ui/Menu/MenuItem';
+import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
+import Menu from 'material-ui/Menu'
 
 const styles = theme => ({
   container: {
@@ -13,10 +14,13 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 250,
   },
   menu: {
     width: 200,
+  },
+  button: {
+    margin: 10,
   },
 });
 
@@ -26,26 +30,26 @@ class AddProject extends Component {
     this.state = {
       title: '',
       category: '',
-      // user: '',
       desc: '',
-      // contactEmail: ''
+      lang: ''
     }
-  }; 
-  
-  static defaultProps = {
-    categories: ['Web Site', 'Web App', 'Mobile App']
-  }
+  };
+
+  static categories  = [
+    'Web Site', 'Web App', 'Mobile App'
+  ]
+
 
   handleSubmit(e){
-    if(this.refs.title.value === ''){
+    if(this.title.value === ''){
       alert('Title is required');
     } else {
       this.setState({newProject:{
-        title: this.refs.title.value,
-        category: this.refs.category.value,
-        lang: this.refs.lang.value,
-        desc : this.refs.desc.value,
-        contactEmail: this.refs.contactEmail.value
+        title: this.name.title.value,
+        category: this.name.category.value,
+        lang: this.name.lang.value,
+        desc : this.name.desc.value,
+        // contactEmail: this.name.contactEmail.value
       }}, function() {
         this.props.addProject(this.state.newProject);
       });
@@ -55,9 +59,9 @@ class AddProject extends Component {
 
   render() {
     const { classes } = this.props;
-    // const categoryOptions = this.props.categories.map(category => {
-    //   return <option key={category} value={category}>{category}</option>
-    // })
+ //     const categoryOptions = this.props.categories.map(category => {
+ //       return <option key={category} value={category}>{category}</option>
+ // })
     return (
     <div>
       <h3>Add a New Project</h3>
@@ -68,23 +72,32 @@ class AddProject extends Component {
             className={classes.TextField}
             value={this.state.name}
             margin="normal"
-          /> 
+          />
+
+          <TextField
+            id="lang"
+            label="Programming Language"
+            className={classes.TextField}
+            value={this.state.lang}
+            margin="normal"
+          />
           <TextField
             id="desc"
             label="Project Description"
             defaultValue="Keep it simple, stupid"
             className={classes.TextField}
+            value={this.state.desc}
           />
-          <br />
-        <Button variant='raised' label='submit' type='submit' color='primary'>Submit</Button>
+        <br />
+        <Button className={classes.button} variant='raised' label='submit' type='submit' color='primary'>Submit</Button>
       </form>
     </div>
         );
   }
 }
 
-AddProject.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// AddProject.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(AddProject);

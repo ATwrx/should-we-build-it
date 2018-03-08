@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
-import { NewProject, Projects } from '../Util'
-import { Profile } from '../Layouts'
+import { NewProject, Projects } from '../Util';
+import { Profile } from '../Layouts';
+
 
 function TabContainer(props) {
   return (
@@ -33,27 +34,33 @@ class  SimpleTabs extends Component {
     // PUT QUERY HERE
      this.setState({projects: [
        {
-         title: 'Should We Build It',
+        title: 'Should We Build It',
         category: 'Web Site',
         lang: 'Javascript',
         desc: 'A small description goes here.',
+        dateCreated : new Date()
       },
       {
         title: 'Social App Example',
         category: 'Mobile App',
         lang: 'Javascript',
         desc: 'A small description goes here.',
+        dateCreated : new Date()
       },
       {
         title: 'Shopping App Example',
         category: 'Web App',
         lang: 'Javascript',
         desc: 'A small description goes here.',
+        dateCreated : new Date()
+
       }
     ], u: {
-      name : 'Example Man',
-      ints : ['Golfing', 'Acting Like I Know What I\'m Doing'],
-      projectCount : 3
+      name_first : 'Dev',
+      name_last : 'Dude',
+      name_full : 'Dev Dude',
+      projectCount : 3,
+      stars : 25
     }}
    );
   }
@@ -73,7 +80,7 @@ class  SimpleTabs extends Component {
               <Projects projects={this.state.projects}/>
             </TabContainer>}
             {this.props.tabValue === 2 && <TabContainer>
-              <Profile name={this.state.u.name} ints={this.state.u.ints} projectCount={this.state.u.projectCount}/>
+              <Profile start={this.state.u.stars} name={this.state.u.name_full} ints={this.state.u.ints} projectCount={this.state.u.projectCount}/>
             </TabContainer>}
         </div>
     )

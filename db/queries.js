@@ -1,4 +1,3 @@
- 
 	var db = require('../models');
 	var sequelize = require('Sequelize');
 	var bodyParser = require("body-parser");

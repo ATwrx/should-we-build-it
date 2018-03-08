@@ -1,4 +1,4 @@
-import db from '../models'
+import { db } from '../models'
 
 export function allProjects() { //brings back all the projects
   db.Projects.findAll({}).then(function(res){
@@ -63,7 +63,3 @@ export function deleteComment(c_id) {
 // 		readComments(res.projectId);
 // 	});
 // };
-
-export default {
- allProjects, addProject,
-}

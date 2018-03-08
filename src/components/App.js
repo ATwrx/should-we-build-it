@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Reboot from 'material-ui/Reboot';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Header, Body} from './Layouts';
-// import { allProjects, addProject, } from './db'
+
 const style = {
   minHeight: "100vh",
   fontFamily: 'Roboto, sans-serif',
