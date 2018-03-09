@@ -37,7 +37,7 @@ app.use(express.static("public"));
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() { //default is true but this overwrite existing tables
+db.sequelize.sync({ force: false }).then(function() { //default is true but this overwrite existing tables
   app.listen(port, function() {
     console.log("App listening on PORT " + port);
   });
