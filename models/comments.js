@@ -28,36 +28,42 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATE,
             defaultValue: sequelize.literal('now()'),
             allowNull: false
-        },
-
-        user_id: {
-        
-             type: DataTypes.INTEGER,
-             allowNull: false
         }
 
+        // user_id: {
+        
+        //      type: DataTypes.INTEGER,
+        //      allowNull: false
+        // }
+
 
     });
 
-       Comments.associate = function (models) {
-    models.Comments.belongsTo(models.Users, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+    Comments.associate = function (models) {
+      models.Comments.belongsTo(models.Users, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+    };
 
-        Comments.associate = function (models) {
-    models.Comments.belongsTo(models.Projects, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  
+  //       Comments.associate = function (models) {
+  //       models.Comments.belongsTo(models.Projects, {
+  //       foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // }
+  // };
+
+
+
 
 
 
  
     return Comments;
- 
+
 }
+ 

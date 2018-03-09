@@ -5,9 +5,15 @@
 		
 
 
-	function allProjects() { //brings back all the projects
+	function allProjects() { //brings back all the projects and user info
 
-		db.Projects.findAll({}).then(function(res){
+
+		db.Projects.findAll({
+			include: [{
+			  model: db.Users,
+		  //  required: false - if true this is an inner join, false or default is outer join
+			 }]
+		  }).then(function(res){
 
 			var resArr = [];
 
@@ -15,12 +21,25 @@
 
 				resArr.push(res[i].dataValues);
 		}
-
-			console.log(resArr);
+			// console.log(resArr);
+			console.log("-------------------------------------");
+			console.log(resArr[0].project_name);
+			console.log(resArr[0].project_desc);
+			console.log(resArr[0].project_lang);
+			console.log(resArr[0].User.firstname + " " +  resArr[0].User.lastname);			
 	});
 	};
 
-		function readComments(projectId) { //brings back comments assigned by projectID
+	// 	db.Projects.findAll({}).then(function(res){
+	// 		var resArr = [];
+	// 		for (let i=0; i < res.length; i++) {
+	// 			resArr.push(res[i].dataValues);
+	// 	}
+	// 		console.log(resArr);
+	// });
+	// };
+
+		function readComments(projectId) { //brings back comments assigned by projectID and user info
 
 
 		db.Comments.findAll({
@@ -28,7 +47,12 @@
 				where: {
 
 					ProjectID: projectId
-				}
+				},
+				
+				include: [{
+					model: db.Users,
+				//  required: false - if true this is an inner join, false or default is outer join
+				   }]
 
 		}).then(function(res){
 
@@ -39,7 +63,9 @@
 				resArr.push(res[i].dataValues);
 		}
 
-			console.log(resArr);
+		console.log("-------------------------------------");
+			console.log(resArr[0].comment);
+			console.log(resArr[0].User.firstname + " " +  resArr[0].User.lastname);
 		});
 		};
 
@@ -98,8 +124,8 @@
   		
 
  
- allProjects();
-	// Comments(1);
+//  allProjects();
+	// readComments(1);
 	// addProject();
 	// deleteComment(5);
 	// editComment();

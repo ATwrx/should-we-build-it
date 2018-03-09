@@ -5,16 +5,16 @@ module.exports = {
 
         return queryInterface.bulkInsert('Comments', [{
         comment: 'I think this project would be super valuable, I would use it',
-        user_id: '1',
+        userId: '1',
         ProjectId: '1'        
 
       },{
         comment: "I'm not so sure about this one, don't really see the use",
-        user_id: '3',
+        userId: '3',
         ProjectId: '2'
       },{
       comment: "I like this idea for a travel app - having everything in one place would be great",
-        user_id: '2',
+        userId: '2',
         ProjectId: '3'
       }], {});
   },

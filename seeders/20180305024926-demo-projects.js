@@ -8,20 +8,20 @@ module.exports = {
         project_desc: 'Website where developers can sound out ideas or gain interested parties',
         project_lang: 'Node.js',
         category: 'website',
-        UserId: '2'
+        Users_id: '2'
 
       },{
         project_name: 'Angry Letter / Letter of Complaint Generator',
         project_desc: 'Website which tailors letters based on the situation and level of irritation',
         project_lang: 'Node.js',
         category: 'website',
-        UserId: '1'
+        Users_id: '1'
       },{
          project_name: 'Trip tool / Travel wallet',
         project_desc: 'Carry tickets, recommendations and useful information with a new travel app',
         project_lang: 'Node.js',
         category: 'mobile app',
-        UserId: '3'
+        Users_id: '3'
       }], {});
   },
     
