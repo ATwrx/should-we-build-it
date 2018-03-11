@@ -66,7 +66,7 @@ class AddProject extends Component {
     <div>
       <h3>Add a New Project</h3>
         <form onSubmit={this.handleSubmitatwrx
-          }>
+          }></form>
           <TextField
             id="title"
             label="Project Title"
