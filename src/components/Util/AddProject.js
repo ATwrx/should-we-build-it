@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
-import Menu from 'material-ui/Menu'
 
 const styles = theme => ({
   container: {
@@ -65,8 +63,7 @@ class AddProject extends Component {
     return (
     <div>
       <h3>Add a New Project</h3>
-        <form onSubmit={this.handleSubmitatwrx
-          }></form>
+        <form onSubmit={this.handleSubmit}>
           <TextField
             id="title"
             label="Project Title"
@@ -97,8 +94,8 @@ class AddProject extends Component {
   }
 }
 
-// AddProject.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+ AddProject.propTypes = {
+   classes: PropTypes.object.isRequired,
+ };
 
 export default withStyles(styles)(AddProject);
