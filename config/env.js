@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
@@ -77,6 +75,8 @@ function getClientEnvironment(publicUrl) {
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: publicUrl,
+        DATABASE_URL:'mysql://ljg4pq9xy78cfyx1:jm4lypa67xzc76os@x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z0iu6axt5cfpdunt',
+        JAWSDB_URL:'mysql://ljg4pq9xy78cfyx1:jm4lypa67xzc76os@x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z0iu6axt5cfpdunt',
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

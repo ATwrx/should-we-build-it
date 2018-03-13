@@ -1,5 +1,5 @@
 	var db = require('../models');
-	var sequelize = require('Sequelize');
+	var Sequelize = require('sequelize');
 	var bodyParser = require("body-parser");
 
 		
@@ -11,7 +11,7 @@
 		db.Projects.findAll({
 			include: [{
 			  model: db.Users,
-		  //  required: false - if true this is an inner join, false or default is outer join
+				//required: false - if true this is an inner join, false or default is outer join
 			 }]
 		  }).then(function(res){
 
@@ -124,7 +124,7 @@
   		
 
  
-//  allProjects();
+  allProjects();
 	// readComments(1);
 	// addProject();
 	// deleteComment(5);

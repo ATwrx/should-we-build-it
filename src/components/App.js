@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Reboot from 'material-ui/Reboot';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Header, Body} from './Layouts';
 
@@ -25,7 +24,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Reboot />
         <MuiThemeProvider>
           <div className="App" style={style}>
             <Header />
