@@ -57,21 +57,21 @@ module.exports = function(sequelize, DataTypes) {
             });
 
 
-//     Projects.associate = function(models) {
-//     // A project can't be created without a user due to the foreign key constraint
-//     Projects.belongsTo(models.Users, {
-//       foreignKey: {
-//         allowNull: true
-//       }
-//     });
-//   };
     Projects.associate = function(models) {
-    // Associating users with votes
-    // When an user is deleted, also delete any associated votes
-    Projects.hasMany(models.Comments, {
-      onDelete: "cascade"
+    // A project can't be created without a user due to the foreign key constraint
+    Projects.belongsTo(models.Users, {
+      foreignKey: {
+        allowNull: true
+      }
     });
   };
+//     Projects.associate = function(models) {
+//     // Associating users with votes
+//     // When an user is deleted, also delete any associated votes
+//     Projects.hasMany(models.Comments, {
+//       onDelete: "cascade"
+//     });
+//   };
 
  
     return Projects;
