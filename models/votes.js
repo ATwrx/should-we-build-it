@@ -35,14 +35,14 @@ module.exports = function(sequelize, DataTypes){
             });
 
 
-    Votes.associate = function(models) {
-    // A vote can't be created without a user due to the foreign key constraint
-    Votes.belongsTo(models.Users, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  //   Votes.associate = function(models) {
+  //   // A vote can't be created without a user due to the foreign key constraint
+  //   Votes.belongsTo(models.Users, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
 
     Votes.associate = function(models) {

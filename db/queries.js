@@ -21,7 +21,7 @@
 
 				resArr.push(res[i].dataValues);
 		}
-			// console.log(resArr);
+			console.log(res);
 			console.log("-------------------------------------");
 			console.log(resArr[0].project_name);
 			console.log(resArr[0].project_desc);
@@ -110,13 +110,13 @@
 
 
   			var newComment = {  
-  				comment: newComment
+  				comment: newcomment
 					};
 
-					db.Comments.update(newComment, {where: { id: id } })  
+					db.Comments.update(newComment, {where: { id:id } })  
 				.then(function(res) {
      	
-    		readComments(projectId);
+    		readComments(ProjectID);
     	});
   };
 
@@ -124,8 +124,8 @@
   		
 
  
-  allProjects();
+//   allProjects();
 	// readComments(1);
 	// addProject();
-	// deleteComment(5);
-	// editComment();
+	// deleteComment(4);
+	editComment(3);
