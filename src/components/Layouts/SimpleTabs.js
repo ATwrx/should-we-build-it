@@ -28,11 +28,14 @@ const styles = theme => ({
 class  SimpleTabs extends Component {
  constructor(props) {
    super(props);
-   this.state = { tabValue: props.tabValue }
+   this.state = {
+     tabValue: props.tabValue,
+     projects: props.projects,               
+   }
  }
   componentWillMount(){
-    // PUT QUERY HERE
-     this.setState({projects: [
+     this.setState({
+      /* projects: [
        {
         title: 'Should We Build It',
         category: 'Web Site',
@@ -55,7 +58,8 @@ class  SimpleTabs extends Component {
         dateCreated : new Date()
 
       }
-    ], u: {
+    ],*/
+       u: {
       name_first : 'Dev',
       name_last : 'Dude',
       name_full : 'Dev Dude',

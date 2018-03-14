@@ -22,7 +22,7 @@ class Body extends Component {
   render() {
     return (
     <div className="mainBody" >
-      <SimpleTabs  tabValue={this.state.tabValue} />
+      <SimpleTabs  tabValue={this.state.tabValue} project={this.state.projects} />
       <Paper style={styles} className="footer" position="static">
         <Tabs
           value={this.state.tabValue}
