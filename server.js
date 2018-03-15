@@ -1,44 +1,51 @@
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
-// *** Dependencies
-// =============================================================
-var express = require("express");
-var methodoverride = require('method-override');
-var bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
+const db = require('./models');
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-// Sets up the Express App
-// =============================================================
-var app = express();
-var port = process.env.PORT || 8080;
-
-// Requiring our models for syncing
-var db = require("./models");
-
-// Sets up the Express app to handle data parsing
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
+//app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// Static directory
-app.use(express.static("public"));
+/*function allProjects() {*/
+//db.Projects.findAll({
+//include: [
+//{
+//model: db.Users,
+//},
+//],
+//}).then(res => {
+//console.log(res);
+//let projects = () => {
 
-// Handlebars
+/*for (let project of res) {*/
+//console.log('-------------------------------------');
+//console.log(project.project_name);
+//console.log(project.project_desc);
+//console.log(project.project_lang);
+//console.log(project.User.firstname + ' ' + res[0].User.lastname);
+/*}*/
+/*}*/
+//});
+/*};*/
 
-// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-// app.set('view engine', 'handlebars');
-
-
-// var router = require('./controllers/burger-controllers.js');
-// app.use('/', router);
-
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
-db.sequelize.sync({ force: false }).then(function() { //default is true but this overwrite existing tables
-  app.listen(port, function() {
-    console.log("App listening on PORT " + port);
+db.sequelize.sync({force: false}).then(function() {
+  app.listen(PORT, function() {
+    console.log('App listening on PORT ' + PORT);
+    app.get('/api', () => {
+      db.Projects.findAll().then(projects => {
+        projects.forEach(project => {
+          let projectArr = {};
+/*          console.log(project.dataValues);
+          console.log(project.project_name);
+          console.log(
+            '=============================================================',
+          ); */
+          projectArr = project.dataValues;
+          console.log(projectArr)
+          return projectArr;
+        });
+      });
+    });
   });
 });

@@ -1,5 +1,3 @@
-'use strict';
-
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
@@ -8,7 +6,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+//const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -85,7 +83,6 @@ module.exports = {
       //new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
     ],
   },
-  target: 'node',
   module: {
     strictExportPresence: true,
     rules: [
@@ -247,5 +244,5 @@ module.exports = {
   performance: {
     hints: false,
   },
-  externals: ['pg', 'sqlite3', 'tedious', 'pg-hstore'],
+  externals: ['pg', 'sqlite3', 'tedious', 'pg-hstore', 'mysql'],
 };

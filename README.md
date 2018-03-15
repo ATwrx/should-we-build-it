@@ -36,15 +36,12 @@ yarn install
 #### You're all set
 
 ```
-yarn start 
+node server.js && yarn start
 ```
 
-This will start your dev server. 
+This will start your dev server and an express api server.. 
 
 
 ### Better Documention in the future.... 
 
-if using sequelize then node server.js followed by
-```bash
- $ node_modules/.bin/sequelize db:seed:all will create the db and seed some basic data
-```
+

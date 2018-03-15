@@ -111,5 +111,8 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "request": "^2.85.0"
+  },
+  "proxy": "http://localhost:3001"
 }

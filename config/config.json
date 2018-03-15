@@ -4,7 +4,8 @@
     "password": "jm4lypa67xzc76os",
     "database": "z0iu6axt5cfpdunt",
     "host": "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "proxy": "localhost:3001"
   },
   "test": {
     "username": "root",
@@ -14,10 +15,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "ljg4pq9xy78cfyx1",
+    "password": "jm4lypa67xzc76os",
+    "database": "z0iu6axt5cfpdunt",
+    "host": "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
