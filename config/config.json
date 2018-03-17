@@ -4,8 +4,7 @@
     "password": "jm4lypa67xzc76os",
     "database": "z0iu6axt5cfpdunt",
     "host": "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "dialect": "mysql",
-    "proxy": "localhost:3001"
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",

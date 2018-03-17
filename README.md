@@ -35,11 +35,17 @@ yarn install
 
 #### You're all set
 
+```bash
+node server.js 
 ```
-node server.js && yarn start
+and then in another terminal
+```bash
+yarn start
 ```
 
-This will start your dev server and an express api server.. 
+#### TODO: Add concurrent(?) npm package so that only yarn start is needed.
+
+This will start webpackDevServer and an express server to route the api.. 
 
 
 ### Better Documention in the future.... 
