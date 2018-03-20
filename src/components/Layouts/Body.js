@@ -13,7 +13,7 @@ class Body extends Component {
   constructor(props){
     super(props)
     this.state ={
-      tabValue: this.props.tabValue
+      tabValue: this.props.tabValue,
     }
   }
  handleChange = (event, tabValue) => {
@@ -22,7 +22,7 @@ class Body extends Component {
   render() {
     return (
     <div className="mainBody" >
-      <SimpleTabs  tabValue={this.state.tabValue} project={this.state.projects} />
+      <SimpleTabs  tabValue={this.state.tabValue} projects={this.props.projects} />
       <Paper style={styles} className="footer" position="static">
         <Tabs
           value={this.state.tabValue}

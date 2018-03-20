@@ -31,14 +31,14 @@ router.get('/', function(req, res) {
 db.sequelize.sync({force: false});
 
 app.listen(PORT, function() {
-  console.log('API running on port ' + PORT + ', but the proxy is 3000');
+  console.log('API running on port ' + PORT + '; the are proxied from PORT:3000');
 });
 
 router
   .route('/projects')
   .get(function(req, res) {
-    db.Projects.findAll().then(val => {
-      let filterRes = val.map(p => {
+    db.Projects.findAll().then(query => {
+      let filteredRes = query.map(p => {
         return {
           id: p.id,
           title: p.project_name,
@@ -49,7 +49,8 @@ router
           createdDate: p.createdAt,
         };
       });
-    res.json(filterRes)
+      console.log(filteredRes);
+      res.send(filteredRes);
     });
   })
   // This will be the POST to create a new Project

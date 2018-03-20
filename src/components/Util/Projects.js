@@ -7,7 +7,7 @@ class Projects extends Component {
     if (this.props.projects) {
       projectItems = this.props.projects.map(project => {
         return (
-          <ProjectItem key={project.id} project={project} />
+          <ProjectItem key={project.title} project={project} />
         );
       });
     }

@@ -11,20 +11,18 @@ const style = {
 class App extends Component {
   state = {
     tabValue: 0,
-    error: null,
     projects: [],
+    error: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     fetch('/api/projects')
-      .then(res => {
-        res.json()
-      })
+      .then(res => res.json())
       .then(
-        result => {
+        p => {
           this.setState({
             isLoaded: true,
-            projects: result,
+            projects: p,
           });
         },
         error => {
@@ -35,16 +33,12 @@ class App extends Component {
         },
       );
   }
-  handleChange = (event, tabValue) => {
-    this.setState({tabValue});
-  };
 
   render() {
     return (
       <div className="App" style={style}>
         <Header />
         <Body
-          handleChange={this.handleChange.bind(this)}
           tabValue={this.state.tabValue}
           projects={this.state.projects}
         />
