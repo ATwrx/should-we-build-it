@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs, Paper } from 'material-ui';
 import { Tab } from 'material-ui/Tabs';
-import { SimpleTabs } from '../Layouts';
+import { PageTabs } from '../Layouts';
 
 const styles = {
     position: "fixed",
@@ -22,7 +22,7 @@ class Body extends Component {
   render() {
     return (
     <div className="mainBody" >
-      <SimpleTabs  tabValue={this.state.tabValue} projects={this.props.projects} />
+      <PageTabs tabValue={this.state.tabValue} projects={this.props.projects} />
       <Paper style={styles} className="footer" position="static">
         <Tabs
           value={this.state.tabValue}

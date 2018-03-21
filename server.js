@@ -49,13 +49,19 @@ router
           createdDate: p.createdAt,
         };
       });
-      console.log(filteredRes);
       res.send(filteredRes);
     });
   })
+
   // This will be the POST to create a new Project
   .post(function(req, res) {
-    //TODO
+    console.log('Post made', res)
+    let title, desc, lang;
+    db.Projects.create({
+      project_name: title,
+      project_desc: desc,
+      project_lang: lang,
+    });
   });
 
 // Registers the routes && prefixes all routes with /api

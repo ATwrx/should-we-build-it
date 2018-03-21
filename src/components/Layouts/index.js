@@ -1,8 +1,8 @@
 import Header from './Header'
 import Body from './Body'
 import Profile from './Profile'
-import SimpleTabs from './SimpleTabs'
+import PageTabs from './PageTabs'
 
 export {
-    Header, Body,  Profile, SimpleTabs,
+    Header, Body,  Profile, PageTabs,
 }
