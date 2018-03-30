@@ -55,12 +55,14 @@ router
 
   // This will be the POST to create a new Project
   .post(function(req, res) {
-    console.log('Post made', res)
-    let title, desc, lang;
+    console.log(req)
+    var title, desc, lang, category, user;
     db.Projects.create({
       project_name: title,
+      category: category,
       project_desc: desc,
       project_lang: lang,
+      UserId: user,
     });
   });
 
