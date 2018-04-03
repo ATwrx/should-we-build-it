@@ -38,10 +38,7 @@ class App extends Component {
     return (
       <div className="App" style={style}>
         <Header />
-        <Body
-          tabValue={this.state.tabValue}
-          projects={this.state.projects}
-        />
+        <Body tabValue={this.state.tabValue} projects={this.state.projects} />
       </div>
     );
   }

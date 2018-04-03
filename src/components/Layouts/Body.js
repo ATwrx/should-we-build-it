@@ -13,7 +13,7 @@ class Body extends Component {
   constructor(props){
     super(props)
     this.state ={
-      tabValue: this.props.tabValue,
+      tabValue: 0,
     }
   }
  handleChange = (event, tabValue) => {
