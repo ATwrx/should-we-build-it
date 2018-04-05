@@ -13,6 +13,7 @@ class App extends Component {
     tabValue: 0,
     projects: [],
     error: null,
+    isLoggedIn: false,
   };
 
   componentDidMount() {

@@ -35,13 +35,16 @@ yarn install
 
 #### You're all set
 
+First, start the express server
+
 ```bash
-node server.js 
+yarn start-server
 ```
-and then in another terminal
+leave that running, and then in another terminal
 ```bash
 yarn start
 ```
+
 
 #### TODO: Add concurrent(?) npm package so that only yarn start is needed.
 

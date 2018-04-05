@@ -5,7 +5,7 @@ import Typography from 'material-ui/Typography';
 import {NewProject, Projects} from '../Util';
 import {Profile} from '../Layouts';
 
-function TabContainer(props) {
+const TabContainer = (props) => {
   return (
     <Typography component="div" style={{padding: 8 * 3}}>
       {props.children}
@@ -24,24 +24,12 @@ const styles = theme => ({
   },
 });
 
-class SimpleTabs extends Component {
+class PageTabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tabValue: props.tabValue,
     };
-  }
-
-  componentWillMount() {
-    this.setState({
-      u: {
-        name_first: 'Dev',
-        name_last: 'Dude',
-        name_full: 'Dev Dude',
-        projectCount: 3,
-        stars: 25,
-      },
-    });
   }
 
   handleChange = (event, tabValue) => {
@@ -67,10 +55,7 @@ class SimpleTabs extends Component {
         {this.props.tabValue === 2 && (
           <TabContainer>
             <Profile
-              stars={this.state.u.stars}
-              name={this.state.u.name_full}
-              ints={this.state.u.ints}
-              projectCount={this.state.u.projectCount}
+              user={this.props.user}
             />
           </TabContainer>
         )}
@@ -79,8 +64,8 @@ class SimpleTabs extends Component {
   }
 }
 
-SimpleTabs.propTypes = {
+PageTabs.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleTabs);
+export default withStyles(styles)(PageTabs);

@@ -20,9 +20,11 @@ class ProjectItem extends Component {
           {this.props.project.title}
         </Typography>
 
+        {/*
         <Typography variant="subheading" gutterbottom="true">
           {this.props.project.createdDate}
-        </Typography>
+        </Typography> 
+        */}
 
         <Typography variant="body2" align="left">
           Category : {this.props.project.category}

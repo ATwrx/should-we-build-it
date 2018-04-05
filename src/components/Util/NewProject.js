@@ -18,15 +18,14 @@ class NewProject extends Component {
     super(props);
     this.state = {
       projects: [],
+      newProject: [],
     };
   }
-  //componentWillMount(){ }
 
-  handleAddProject(project) {
-    let projects = this.props.projects;
-    projects.push(project);
-    this.setState({projects: projects});
-  }
+  handleAddProject = project => {
+    this.setState({newProject: project});
+    this.props.projects.push(project);
+  };
 
   render() {
     return (

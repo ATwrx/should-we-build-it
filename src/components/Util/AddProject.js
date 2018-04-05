@@ -33,7 +33,7 @@ class AddProject extends Component {
 
   static categories = ['Web Site', 'Web App', 'Mobile App'];
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     if (e.target.title.value === '') {
       alert('Title is required');
@@ -42,23 +42,19 @@ class AddProject extends Component {
         {
           newProject: {
             title: e.target.title.value,
-            //category: e.target.category.value,
             lang: e.target.lang.value,
             desc: e.target.desc.value,
           },
         },
-        function() {
+        () => {
           this.props.addProject(this.state.newProject);
         },
       );
     }
-  }
+  };
 
   render() {
     const {classes} = this.props;
-    //     const categoryOptions = this.props.categories.map(category => {
-    //       return <option key={category} value={category}>{category}</option>
-    // })
     return (
       <div>
         <h3>Add a New Project</h3>
@@ -80,6 +76,7 @@ class AddProject extends Component {
             value={this.state.lang}
             margin="normal"
           />
+
           <br />
 
           <TextField
@@ -87,7 +84,10 @@ class AddProject extends Component {
             label="Project Description"
             className={classes.TextField}
             value={this.state.desc}
+            rowsMax="4"
+            multiline
           />
+
           <br />
 
           <Button

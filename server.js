@@ -1,14 +1,22 @@
 const express = require('express');
-const app = express();
-const router = express.Router();
-const bodyParser = require('body-parser');
+const expressGraphQL = require('express-graphql');
+const schema = require('./schema');
+// const bodyParser = require('body-parser');
 const db = require('./models');
 
-// In dev requests are proxied from PORT 3000
+const app = express();
+const router = express.Router();
 const PORT = process.env.PORT || 3001;
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use('/graphql', expressGraphQL({
+  schema:schema,
+  graphiql:true,
+}))
+// app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.json());
+// app.listen(PORT, () => {
+//   console.log('Server is running on localhost:' + PORT)
+// });
 
 router.use(function(req, res, next) {
   // This is where middleware goes
@@ -30,9 +38,7 @@ router.get('/', function(req, res) {
 
 db.sequelize.sync({force: false});
 
-app.listen(PORT, function() {
-  console.log('API running on port ' + PORT + '; the are proxied from PORT:3000');
-});
+app.listen(PORT);
 
 router
   .route('/projects')
