@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('axios')
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -6,8 +6,30 @@ const {
   GraphQLSchema,
   // GraphQLList,
   // GraphQLNonNull,
-  // GraphQLID,
+  GraphQLID,
 } = require('graphql');
+
+// Hard Coded Sample Data
+// const users = [
+//   {
+//     id:  0 ,
+//     name: 'Andrew Thompson',
+//     userName: 'samplename',
+//     email: 'super@duper.com',
+//   },
+//   {
+//     id: 1,
+//     name: 'John Doe',
+//     userName: 'jd',
+//     email: 'johnyy@john.com',
+//   },
+//   {
+//     id: 2,
+//     name: 'Loo Pee',
+//     userName: 'Lowpee',
+//     email: 'loo@pee.com',
+//   },
+// ];
 
 // User Query
 const UserType = new GraphQLObjectType({
@@ -24,14 +46,10 @@ const UserType = new GraphQLObjectType({
 const ProjectType = new GraphQLObjectType({
   name: 'Project',
   fields: () => ({
-    id: {type: GraphQLInt},
+    id: {type: GraphQLString},
     project_name: {type: GraphQLString},
-    category: {type: GraphQLString},
-    project_lang: {type: GraphQLString},
-    project_desc: {type: GraphQLString},
-    UserId: {type: GraphQLString},
-    createdAt: {type: GraphQLString},
-  }),
+
+  })
 });
 // Root Query
 const RootQuery = new GraphQLObjectType({
@@ -40,19 +58,16 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: {
-        id: {type: GraphQLInt},
-      },
-      resolve(parentValue, args) {
-        axios.get('localhost:3000/user');
+        id: {type: GraphQLString},
       },
     },
     project: {
       type: ProjectType,
       args: {
-        id: {type: GraphQLInt},
+        id: {type: GraphQLID}
       },
       resolve(parentValue, args) {
-        axios.get('localhost:3000/api/projects') 
+        axios.get('/projects')
       }
     },
   },
