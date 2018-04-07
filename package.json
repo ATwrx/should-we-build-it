@@ -33,6 +33,7 @@
     "fs-extra": "3.0.1",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
+    "graphql-tools": "^2.23.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "jshint": "^2.9.5",

@@ -15,7 +15,6 @@ const UserModel = db.define('user', {
   firstName: {type: Sequelize.STRING},
   lastName: {type: Sequelize.STRING},
   email: {type: Sequelize.STRING},
-  rating: {type: Sequelize.INTEGER},
 });
 
 const ProjectModel = db.define('project', {
@@ -23,11 +22,12 @@ const ProjectModel = db.define('project', {
   summary: {type: Sequelize.STRING},
   text: {type: Sequelize.STRING},
   created: {type: Sequelize.NOW},
+  rating: {type: Sequelize.INTEGER},
 });
 
 const CommentModel = db.define('comment', {
-   text: {type: Sequelize.STRING}, 
-   created: {type: Sequelize.NOW},
+  text: {type: Sequelize.STRING},
+  created: {type: Sequelize.NOW},
 });
 
 // Relations
