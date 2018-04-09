@@ -4,10 +4,10 @@ import App from './components/App';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
 
-const httpLink = new HttpLink({uri: 'https://api.graph.cool/simple/v1/cjfrlkion2tff0153twgaeh4c'});
+const httpLink = new HttpLink({uri: 'https://api.graph.cool/simple/v2/cjfrlkion2tff0153twgaeh4c'});
 
 const client = new ApolloClient({
     link: httpLink,
