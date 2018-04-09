@@ -30,16 +30,12 @@ npm i -g graphcool
 
 ```
 git clone https://github.com/ATwrx/should-we-build-it
-cd should-we-build-it
+cd should-we-build-it/client
 yarn install
+yarn start
 ```
 
 #### You're all set
 
-First, start the express server
-
-```bash
-yarn start
-```
 
 ### Better Documention in the future.... 
