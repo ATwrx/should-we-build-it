@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import ApolloClient from 'apollo-boost';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import {Header, Body} from './Layouts';
 
 const style = {
@@ -46,4 +47,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const ProjectFeedQuery = gql`query {
+    allProjects(orderBy: createdAt_DESC) {
+      id
+      title
+      desc
+        }
+    }`
+
+export default graphql(ProjectFeedQuery)(App);

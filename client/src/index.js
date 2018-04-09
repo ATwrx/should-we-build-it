@@ -16,7 +16,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-      <App />
+    <Router>
+     <Route path='/' component={App}/>
+    </Router>
   </ApolloProvider>,
   document.getElementById('root')
 );

@@ -1,0 +1,33 @@
+type User @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String! @isUnique
+  dateOfBirth: DateTime
+  email: String @isUnique
+  projects: [Project!]! @relation(name: "UserProjects")
+  comments: [Comment!]! @relation(name: "UserComments")
+
+}
+
+type Project @model {
+   id: ID! @isUnique
+   createdAt: DateTime!
+   updatedAt: DateTime!
+   slug: String! @isUnique
+   title: String! @isUnique
+   description: String!
+   text: String!
+   rating: Int @defaultValue(value: 0)
+   owner: User! @relation(name: "UserProjects")
+   comments: [Comment!]! @relation(name: "CommentOnProject")
+ }
+
+type Comment @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User! @relation(name: "UserComments")
+  project:  Project! @relation(name: "CommentOnProject")
+  text: String!
+}
