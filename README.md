@@ -19,10 +19,11 @@ yarn -v
 
 If you get a version number then it's already installed.
 
-#### Install yarn
+#### Install yarn & graphcool cli tool
 
 ```
 npm i -g yarn
+npm i -g graphcool
 ```
 
 #### Once yarn is installed
@@ -38,19 +39,7 @@ yarn install
 First, start the express server
 
 ```bash
-yarn start-server
-```
-leave that running, and then in another terminal
-```bash
 yarn start
 ```
 
-
-#### TODO: Add concurrent(?) npm package so that only yarn start is needed.
-
-This will start webpackDevServer and an express server to route the api.. 
-
-
 ### Better Documention in the future.... 
-
-
