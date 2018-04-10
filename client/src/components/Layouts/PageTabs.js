@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
-import {NewProject, Projects} from '../Util';
+import {ProjectForm, Projects} from '../Util';
 import {Profile} from '../Layouts';
 
 const TabContainer = (props) => {
@@ -42,7 +42,7 @@ class PageTabs extends Component {
       <div className={classes.root}>
         {this.props.tabValue === 0 && (
           <TabContainer>
-            <NewProject projects={this.props.projects} />
+            <ProjectForm />
           </TabContainer>
         )}
 

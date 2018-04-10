@@ -1,7 +1,7 @@
-import AddProject from './AddProject'
+import ProjectForm from './ProjectForm'
 import Projects from './Projects'
 import NewProject from './NewProject'
 
 export {
-   AddProject, Projects, NewProject
+   ProjectForm, Projects, NewProject
 }

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Grid, Paper} from 'material-ui';
-import {Projects, AddProject} from '../Util';
+import React, { Component } from 'react';
+import { Grid, Paper } from 'material-ui';
+import { ProjectForm } from '../Util';
 
 const styles = {
   Grid: {
@@ -17,33 +17,26 @@ class NewProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: [],
       newProject: [],
     };
   }
 
-  handleAddProject = project => {
+  handleAddProject = (project) => {
     this.setState({newProject: project});
+    // TODO: Push project to server
     this.props.projects.push(project);
   };
 
   render() {
     return (
       <Grid container>
-        <Grid item sm>
           <Paper style={styles.Paper}>
-            <AddProject
+            <ProjectForm
               projects={this.props.projects}
               addProject={this.handleAddProject.bind(this)}
             />
           </Paper>
         </Grid>
-        <Grid item sm>
-          <div style={styles.Paper}>
-            <Projects projects={this.props.projects} />
-          </div>
-        </Grid>
-      </Grid>
     );
   }
 }

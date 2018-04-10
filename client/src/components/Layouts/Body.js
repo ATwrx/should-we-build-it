@@ -10,15 +10,17 @@ const styles = {
   width: '100%',
 };
 class Body extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       tabValue: 0,
     };
-  }
+  };
+
   handleChange = (event, tabValue) => {
     this.setState({tabValue: tabValue});
   };
+
   render() {
     return (
       <div className="mainBody">
@@ -27,6 +29,7 @@ class Body extends Component {
           projects={this.props.projects}
           user={this.props.user}
         />
+        
         <Paper style={styles} className="footer" position="static">
           <Tabs
             value={this.state.tabValue}

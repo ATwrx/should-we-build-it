@@ -5,27 +5,15 @@ import {withStyles} from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 
 const styles = theme => ({
-  container: {
+  TextArea: {
     display: 'flex',
     flexWrap: 'wrap',
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 250,
-  },
-  menu: {
-    width: 200,
-  },
-  button: {
-    margin: 10,
-  },
 });
 
-class AddProject extends Component {
+class ProjectForm extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       newProject: {},
     };
@@ -33,7 +21,7 @@ class AddProject extends Component {
 
   static categories = ['Web Site', 'Web App', 'Mobile App'];
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (e.target.title.value === '') {
       alert('Title is required');
@@ -67,6 +55,7 @@ class AddProject extends Component {
             value={this.state.title}
             margin="normal"
           />
+
           <br />
 
           <TextField
@@ -84,7 +73,7 @@ class AddProject extends Component {
             label="Project Description"
             className={classes.TextField}
             value={this.state.desc}
-            rowsMax="4"
+            rowsMax="10"
             multiline
           />
 
@@ -104,8 +93,8 @@ class AddProject extends Component {
   }
 }
 
-AddProject.propTypes = {
+ProjectForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AddProject);
+export default withStyles(styles)(ProjectForm);
