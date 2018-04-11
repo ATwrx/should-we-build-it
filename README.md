@@ -26,13 +26,26 @@ npm i -g yarn
 npm i -g graphcool
 ```
 
-#### Once yarn is installed
+#### 
 
 ```
 git clone https://github.com/ATwrx/should-we-build-it
+```
+
+Now, to start the client 
+
+```
 cd should-we-build-it/client
 yarn install
 yarn start
+```
+
+If you'd like to see the grapgql playground:
+
+```
+cd should-we-build-it/server
+yarn install 
+graphcool playground
 ```
 
 #### You're all set
