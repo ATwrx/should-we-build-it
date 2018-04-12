@@ -30,7 +30,7 @@ class ProjectForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(e.value)
+    console.log(this.state)
   };
 
   render() {
@@ -56,7 +56,6 @@ class ProjectForm extends Component {
           label="Programming Language"
           className={classes.TextField}
           value={this.state.lang}
-          defaultValue='Node.js'
           margin="normal"
           onChange={this.handleChange('lang')}
         />
