@@ -3,9 +3,7 @@ types: ./types.graphql
 functions:
 
   authenticate:
-    handler:
-      code:
-        src: ./src/auth0/auth0Authentication.js
+    handler: ./src/auth0/auth0Authentication.js
         environment:
           AUTH0_DOMAIN: ${env:AUTH0_DOMAIN}
           AUTH0_API_IDENTIFIER: ${env:AUTH0_API_IDENTIFIER}

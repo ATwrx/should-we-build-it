@@ -1,7 +1,2 @@
-import ProjectForm from './ProjectForm'
-import Projects from './Projects'
-import NewProject from './NewProject'
-
-export {
-   ProjectForm, Projects, NewProject
-}
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';

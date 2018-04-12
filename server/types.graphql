@@ -4,10 +4,10 @@ type User @model {
   updatedAt: DateTime!
   name: String! @isUnique
   dateOfBirth: DateTime
-  email: String @isUnique
+  email: String 
   projects: [Project!]! @relation(name: "UserProjects")
   comments: [Comment!]! @relation(name: "UserComments")
-
+  auth0UserId: String @isUnique
 }
 
 type Project @model {
@@ -43,7 +43,6 @@ type Comment @model {
 #   updatedAt: DateTime! # read-only (managed by Graphcool)
 # 
 #   email: String
-#   auth0UserId: String @isUnique
 # }
 # 
 

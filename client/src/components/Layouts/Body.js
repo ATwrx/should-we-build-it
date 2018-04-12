@@ -1,17 +1,9 @@
-import React, {Component} from 'react';
-import {Tabs, Paper} from 'material-ui';
-import {Tab} from 'material-ui/Tabs';
-import {PageTabs} from '../Layouts';
+import React, { Component } from 'react';
+import { ProjectForm } from '../Util'
 
-const styles = {
-  position: 'fixed',
-  left: 0,
-  bottom: 0,
-  width: '100%',
-};
 class Body extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       tabValue: 0,
     };
@@ -23,26 +15,7 @@ class Body extends Component {
 
   render() {
     return (
-      <div className="mainBody">
-        <PageTabs
-          tabValue={this.state.tabValue}
-          projects={this.props.projects}
-          user={this.props.user}
-        />
-        
-        <Paper style={styles} className="footer" position="static">
-          <Tabs
-            value={this.state.tabValue}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered>
-            <Tab label="My Projects" />
-            <Tab label="Browse Projects" />
-            <Tab label="My Profile" />
-          </Tabs>
-        </Paper>
-      </div>
+        <ProjectForm />
     );
   }
 }
