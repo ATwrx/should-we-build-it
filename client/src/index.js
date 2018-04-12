@@ -1,21 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
+import ApolloClient from 'apollo-boost';
 
-const httpLink = new HttpLink({uri: 'https://api.graph.cool/simple/v2/cjfrlkion2tff0153twgaeh4c'});
+import { Body } from './components/Layouts';
 
 const client = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache()
+  uri: 'https://api.graph.cool/simple/v2/cjfrlkion2tff0153twgaeh4c',
+
+  // fetchOptions: {
+  //   credentials: 'include',
+  // },
 });
 
-ReactDOM.render(
+
+const App = () => (
   <ApolloProvider client={client}>
-      <App />
-  </ApolloProvider>,
-  document.getElementById('root')
+    <Body />    
+  </ApolloProvider>
 );
+
+ReactDOM.render(<App />, document.getElementById('root'));

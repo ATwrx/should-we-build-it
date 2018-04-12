@@ -14,7 +14,9 @@ class ProjectForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newProject: {},
+      title: '',
+      lang: '',
+      desc: '',
     };
   }
 
@@ -22,26 +24,24 @@ class ProjectForm extends Component {
 
   handleChange = name => event => {
     this.setState({
-      newProject: {
         [name]: event.target.value,
-      },
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    //TODO
+    console.log(e.value)
   };
 
   render() {
     const {classes} = this.props;
-    // onSubmit={this.handleSubmit} <-- prop for the form
     return (
       <form
+        onSubmit={this.handleSubmit}
         onChange={this.handleChange}
         noValidate
-        autoComplete="off">
-
+        autoComplete="off"
+      >
         <TextField
           id="title"
           label="Project Title"
@@ -58,6 +58,7 @@ class ProjectForm extends Component {
           value={this.state.lang}
           defaultValue='Node.js'
           margin="normal"
+          onChange={this.handleChange('lang')}
         />
         <br />
 
@@ -67,8 +68,8 @@ class ProjectForm extends Component {
           className={classes.TextField}
           value={this.state.desc}
           rowsMax="5"
-          controlled
           multiline
+          onChange={this.handleChange('desc')}
         />
         <br />
 

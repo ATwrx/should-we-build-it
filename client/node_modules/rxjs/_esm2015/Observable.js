@@ -156,7 +156,7 @@ export class Observable {
             operator.call(sink, this.source);
         }
         else {
-            sink.add(this.source ? this._subscribe(sink) : this._trySubscribe(sink));
+            sink.add(this.source || !sink.syncErrorThrowable ? this._subscribe(sink) : this._trySubscribe(sink));
         }
         if (sink.syncErrorThrowable) {
             sink.syncErrorThrowable = false;
@@ -225,7 +225,7 @@ export class Observable {
             }, reject, resolve);
         });
     }
-    _subscribe(subscriber) {
+    /** @deprecated internal use only */ _subscribe(subscriber) {
         return this.source.subscribe(subscriber);
     }
     /**

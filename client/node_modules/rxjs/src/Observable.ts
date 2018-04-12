@@ -29,7 +29,7 @@ export class Observable<T> implements Subscribable<T> {
 
   public _isScalar: boolean = false;
 
-  protected source: Observable<any>;
+  /** @deprecated internal use only */ public source: Observable<any>;
   protected operator: Operator<any, T>;
 
   /**
@@ -73,8 +73,7 @@ export class Observable<T> implements Subscribable<T> {
     return observable;
   }
 
-  subscribe(): Subscription;
-  subscribe(observer: PartialObserver<T>): Subscription;
+  subscribe(observer?: PartialObserver<T>): Subscription;
   subscribe(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Subscription;
   /**
    * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
@@ -200,7 +199,7 @@ export class Observable<T> implements Subscribable<T> {
     if (operator) {
       operator.call(sink, this.source);
     } else {
-      sink.add(this.source ? this._subscribe(sink) : this._trySubscribe(sink));
+      sink.add(this.source || !sink.syncErrorThrowable ? this._subscribe(sink) : this._trySubscribe(sink));
     }
 
     if (sink.syncErrorThrowable) {
@@ -272,7 +271,7 @@ export class Observable<T> implements Subscribable<T> {
     });
   }
 
-  protected _subscribe(subscriber: Subscriber<any>): TeardownLogic {
+  /** @deprecated internal use only */ _subscribe(subscriber: Subscriber<any>): TeardownLogic {
     return this.source.subscribe(subscriber);
   }
 
@@ -300,6 +299,7 @@ export class Observable<T> implements Subscribable<T> {
   pipe<A, B, C, D, E, F, G>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>): Observable<G>
   pipe<A, B, C, D, E, F, G, H>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>, op8: OperatorFunction<G, H>): Observable<H>
   pipe<A, B, C, D, E, F, G, H, I>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>, op4: OperatorFunction<C, D>, op5: OperatorFunction<D, E>, op6: OperatorFunction<E, F>, op7: OperatorFunction<F, G>, op8: OperatorFunction<G, H>, op9: OperatorFunction<H, I>): Observable<I>
+  pipe<R>(...operations: OperatorFunction<T, R>[]): Observable<R>
   /* tslint:enable:max-line-length */
 
   /**

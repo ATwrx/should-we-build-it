@@ -1,21 +1,24 @@
-import React, { Component } from 'react';
-import { ProjectForm } from '../Util'
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {ProjectForm} from '../Util';
+import {HeaderWrapped} from '../Layouts';
+
+const styles = {
+  fontFamily: 'Roboto, sans-serif',
+};
 
 class Body extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tabValue: 0,
-    };
-  };
-
-  handleChange = (event, tabValue) => {
-    this.setState({tabValue: tabValue});
-  };
-
   render() {
     return (
-        <ProjectForm />
+      <div className="App" style={styles}>
+        <HeaderWrapped />
+        <Router>
+          <Switch>
+            <Route path="/" exact component={ProjectForm} />
+            <Route path="profile/:user" />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
