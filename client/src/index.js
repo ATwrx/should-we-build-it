@@ -7,7 +7,6 @@ import { Body } from './components/Layouts';
 
 const client = new ApolloClient({
   uri: 'https://api.graph.cool/simple/v2/cjfrlkion2tff0153twgaeh4c',
-
   // fetchOptions: {
   //   credentials: 'include',
   // },
