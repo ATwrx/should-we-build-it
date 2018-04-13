@@ -1,6 +1,5 @@
-import HeaderWrapped from './HeaderWrapped';
+import Header from './Header';
 import Body from './Body';
 import Profile from './Profile';
-import PageTabs from './PageTabs';
 
-export {HeaderWrapped, Body, Profile, PageTabs};
+export {Header, Body, Profile, };

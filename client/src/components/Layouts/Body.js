@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import CssBaseline from 'material-ui/CssBaseline';
 
-import {ProjectForm} from '../Util';
-import {HeaderWrapped} from '../Layouts';
+import { ProjectForm } from '../Util';
+import { Header, Profile } from '../Layouts';
 
 const styles = {
   fontFamily: 'Roboto, sans-serif',
@@ -13,12 +12,11 @@ class Body extends Component {
   render() {
     return (
       <div className="Body" style={styles}>
-        <CssBaseline />
-        <HeaderWrapped />
+        <Header />
         <Router>
           <Switch>
-            <Route path="/" exact component={ProjectForm} />
-            <Route path="profile/:user" />
+            <Route path="/" exact component={Profile} />
+            <Route path="/project-form" component={ProjectForm} />
           </Switch>
         </Router>
       </div>

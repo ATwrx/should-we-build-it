@@ -1,93 +1,83 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { Button, TextField } from 'material-ui';
-
-const styles = theme => ({
-  TextArea: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-});
+import {Form, TextArea, Button} from 'semantic-ui-react';
 
 class ProjectForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      lang: '',
-      desc: '',
-    };
-  }
+  state = {
+    title: '',
+    submittedTitle: '',
+    slug: '',
+    submittedSlug: '',
+    description: '',
+    submittedDescription: '',
+    text: '',
+    submittedText: '',
+  };
 
   static categories = ['Web Site', 'Web App', 'Mobile App'];
 
   handleChange = name => event => {
     this.setState({
-        [name]: event.target.value,
+      [name]: event.target.value,
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log(this.state)
+  handleChange = (e, {name, value}) => this.setState({[name]: value});
+
+  handleSubmit = () => {
+    const {title, slug, description, text} = this.state;
+    this.setState({
+      submittedTitle: title,
+      submittedSlug: slug,
+      submittedDescription: description,
+      submittedText: text,
+    });
   };
 
   render() {
-    const {classes} = this.props;
+    const {title, slug, text, description} = this.state;
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        onChange={this.handleChange}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          id="title"
-          label="Project Title"
-          className={classes.TextField}
-          onChange={this.handleChange('title')}
-          value={this.state.title}
-        />
-        <br />
+      <Form onSubmit={this.handleSubmit}>
 
-        <TextField
-          id="lang"
-          label="Programming Language"
-          className={classes.TextField}
-          value={this.state.lang}
-          margin="normal"
-          onChange={this.handleChange('lang')}
-        />
-        <br />
+        <Form.Group>
+          <Form.Input
+            placeholder="Project Title"
+            name="title"
+            value={title}
+            onChange={this.handleChange}
+          />
 
-        <TextField
-          id="desc"
-          label="Project Description"
-          className={classes.TextField}
-          value={this.state.desc}
-          rowsMax="5"
-          multiline
-          onChange={this.handleChange('desc')}
-        />
-        <br />
+          <Form.Input
+            placeholder="this-is-a-slug"
+            name="slug"
+            value={slug}
+            onChange={this.handleChange}
+          />
+        </Form.Group>
 
-        <Button
-          className={classes.button}
-          variant="raised"
-          label="submit"
-          type="submit"
-          color="primary">
-          Submit
-        </Button>
+        <div className="textAreaWrapper input">
+          <TextArea
+            placeholder="Write a brief summary of your idea..."
+            name="description"
+            value={description}
+            onChange={this.handleChange}
+            autoHeight
+          />
+        </div>
 
-      </form>
+        <div className="textAreaWrapper input">
+          <TextArea
+            placeholder="Write as much as you'd like about your idea here..."
+            name="text"
+            value={text}
+            onChange={this.handleChange}
+            autoHeight
+          />
+        </div>
+
+        <Button content="Submit" type="submit" />
+      </Form>
     );
   }
 }
 
-ProjectForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ProjectForm);
+export default ProjectForm;

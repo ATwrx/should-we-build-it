@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Paper, Typography} from 'material-ui';
 
 const styles = {
   ProjectItem: {
@@ -11,33 +10,14 @@ const styles = {
   },
 };
 
-//TODO: Make createdDate prettier
 class ProjectItem extends Component {
   render() {
     return (
-      <Paper style={styles.ProjectItem} className="ProjectItem">
-        <Typography style={styles.Title} variant="headline" align="center">
+      <div style={styles} >
           {this.props.project.title}
-        </Typography>
+        </div>
 
-        {/*
-        <Typography variant="subheading" gutterbottom="true">
-          {this.props.project.createdDate}
-        </Typography> 
-        */}
 
-        <Typography variant="body2" align="left">
-          Category : {this.props.project.category}
-        </Typography>
-
-        <Typography variant="body2" align="left">
-          Language : {this.props.project.lang}
-        </Typography>
-
-        <Typography variant="body2" align="left">
-          Description : {this.props.project.desc}
-        </Typography>
-      </Paper>
     );
   }
 }
