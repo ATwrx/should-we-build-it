@@ -31,7 +31,7 @@ class Body extends Component {
               <Switch>
                 <Route path="/" exact component={Projects} />
                 <Route path="/add-project" component={ProjectForm} />
-                <Route path="/projects" component={Profile} />
+                <Route path="/profile" component={Profile} />
               </Switch>
             </Grid.Column>
           </Grid>
