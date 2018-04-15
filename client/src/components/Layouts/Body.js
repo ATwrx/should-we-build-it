@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Container, Grid} from 'semantic-ui-react';
 
-import {ProjectForm, Projects} from '../Util';
-import {NavBar, NavMenu, Profile} from '../Layouts';
+import {ProjectForm, NavMenu, Projects} from '../Util';
+import {TitleBar, Profile} from '../Layouts';
 
 const styles = {
   fontFamily: 'Roboto, sans-serif',
@@ -13,13 +13,14 @@ class Body extends Component {
   state = {
     activeItem: '',
   };
+
   handleItemClick = (e, {name}) => this.setState({activeItem: name});
 
   render() {
     return (
       <Router>
         <Container fluid style={styles}>
-          <NavBar />
+          <TitleBar />
           <Grid>
             <Grid.Column width={3}>
               <NavMenu

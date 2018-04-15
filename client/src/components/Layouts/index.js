@@ -1,6 +1,5 @@
-import NavBar from './NavBar';
-import NavMenu from './NavMenu';
+import TitleBar from './TitleBar';
 import Body from './Body';
 import Profile from './Profile';
 
-export {Body, NavBar, NavMenu, Profile};
+export {Body, TitleBar,  Profile};
