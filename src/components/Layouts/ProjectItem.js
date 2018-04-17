@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Header, List} from 'semantic-ui';
+import {Header, List} from 'semantic-ui-react';
 
 export default class ProjectLink extends Component {
   render() {

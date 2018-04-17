@@ -1,4 +1,5 @@
 const { GraphQLServer } = require('graphql-yoga')
+
 const { Prisma } = require('prisma-binding')
 
 const resolvers = {
@@ -42,7 +43,7 @@ const server = new GraphQLServer({
     ...req,
     db: new Prisma({
       typeDefs: 'src/generated/prisma.graphql',
-      endpoint: 'http://localhost:4466/should-we-build-it/dev',
+      endpoint: 'http://localhost:4466/prisma/dev',
       secret: 'secretshh',
       debug: true,
     }),

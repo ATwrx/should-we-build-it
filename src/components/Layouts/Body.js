@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Container, Grid} from 'semantic-ui-react';
 
-import {ProjectForm, NavMenu, Projects} from '../Util';
+import {ProjectForm, NavMenu, ProjectFeed} from '../Util';
 import {TitleBar, Profile} from '../Layouts';
-
-const styles = {
-  fontFamily: 'Roboto, sans-serif',
-};
 
 class Body extends Component {
   state = {
-    activeItem: '',
+    activeItem: '/',
   };
 
   handleItemClick = (e, {name}) => this.setState({activeItem: name});
@@ -19,7 +15,7 @@ class Body extends Component {
   render() {
     return (
       <Router>
-        <Container fluid style={styles}>
+        <Container fluid >
           <TitleBar />
           <Grid>
             <Grid.Column width={3}>
@@ -30,7 +26,7 @@ class Body extends Component {
             </Grid.Column>
             <Grid.Column stretch="true" width={12}>
               <Switch>
-                <Route path="/" exact component={Projects} />
+                <Route path="/" exact component={ProjectFeed} />
                 <Route path="/add-project" component={ProjectForm} />
                 <Route path="/profile" component={Profile} />
               </Switch>
