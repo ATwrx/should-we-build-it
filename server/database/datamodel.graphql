@@ -1,35 +1,44 @@
-type User  {
-  id: ID! @isUnique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String! @isUnique
-  dateOfBirth: DateTime
-  email: String 
-  projects: [Project!]! @relation(name: "UserProjects")
-  comments: [Comment!]! @relation(name: "UserComments")
-  auth0UserId: String @isUnique
+# import Post from "./generated/prisma.graphql"
+
+# defines interface for any object with an ID
+interface Node {
+  id: ID! @unique
 }
 
-type Project  {
-   id: ID! @isUnique
+# main type definitions
+
+type User implements Node {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String! @unique
+  email: String! @unique
+  password: String!
+  role: Role! @default(value: "USER")
+  projects: [Project!]! @relation(name: "ProjectOwner", onDelete: CASCADE)
+  comments: [Comment!]!  @relation(name: "CommentOwner", onDelete: CASCADE)
+  about: String
+}
+
+type Project implements Node {
+   id: ID! @unique
    createdAt: DateTime!
    updatedAt: DateTime!
-   slug: String @isUnique
-   title: String! @isUnique
+   isPublished: Boolean! @default(value: "false")
+   title: String! @unique
    description: String!
    text: String!
-   rating: Int @defaultValue(value: 0)
-   owner: User! @relation(name: "UserProjects")
-   comments: [Comment!]! @relation(name: "CommentOnProject")
- }
-
-type Comment  {
-  id: ID! @isUnique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  user: User! @relation(name: "UserComments")
-  project:  Project! @relation(name: "CommentOnProject")
-  text: String!
+   upVotes: Int! @default(value: 0)
+   downVotes: Int! @default(value: 0)
+   owner: User! @relation(name: "ProjectOwner", onDelete: SET_NULL)
+   comments: [Comment!]! @relation(name: "Comments", onDelete: CASCADE)
 }
 
-
+type Comment implements Node  {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User! @relation(name: "CommentOwner", onDelete: SET_NULL)
+  project:  Project! @relation(name: "Comments", onDelete: SET_NULL)
+  text: String!
+}

@@ -1,5 +1,5 @@
 import ProjectForm from './ProjectForm';
-import Projects from './Projects';
+import ProjectFeed from './ProjectFeed';
 import NavMenu from './NavMenu';
 
-export {ProjectForm, Projects, NavMenu};
+export {ProjectForm, ProjectFeed, NavMenu};

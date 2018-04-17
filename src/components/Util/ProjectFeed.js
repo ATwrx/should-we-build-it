@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProjectItem from "../Layouts/ProjectItem";
 
-class Projects extends Component {
+class ProjectFeed extends Component {
   render() {
     let projectItems;
     if (this.props.projects) {
@@ -12,11 +12,11 @@ class Projects extends Component {
       });
     }
     return (
-      <div className="Projects">
+      <div className="ProjectFeed">
         {projectItems}
       </div>
     );
   }
 }
 
-export default Projects;
+export default ProjectFeed;

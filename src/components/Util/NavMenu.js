@@ -10,7 +10,7 @@ class NavMenu extends Component {
       <Menu fluid vertical secondary>
         <NavLink to="/">
           <Menu.Item
-            as='p'
+            as="p"
             name="explore"
             active={activeItem === 'explore'}
             onClick={handleItemClick}>
@@ -20,7 +20,7 @@ class NavMenu extends Component {
 
         <NavLink to="/add-project">
           <Menu.Item
-            as='p'
+            as="p"
             name="projects"
             active={activeItem === 'projects'}
             onClick={handleItemClick}>
@@ -30,7 +30,7 @@ class NavMenu extends Component {
 
         <NavLink to="/profile">
           <Menu.Item
-            as='p'
+            as="p"
             name="profile"
             active={activeItem === 'profile'}
             onClick={handleItemClick}>

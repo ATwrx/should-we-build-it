@@ -1,7 +1,7 @@
-# import Post from "./generated/prisma.graphql"
+# import Project from "./generated/prisma.graphql"
 
 type Query {
-  feed: [Post!]!
+  feed: [Project!]!
   drafts: [Post!]!
   post(id: ID!): Post
 }
