@@ -5,7 +5,7 @@ service: should-we-build-it
 stage: dev
 
 # to disable authentication:
-# disableAuth: true
+#disableAuth: true
 secret: secretshh
 
 # the file path pointing to your data model

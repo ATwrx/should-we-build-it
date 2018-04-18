@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import ProjectItem from "../Layouts/ProjectItem";
+import React, {Component} from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'graphql-tag';
+import { ProjectLink } from '../Layouts/';
 
 const projectQuery = {
   query: gql`
@@ -25,16 +25,10 @@ export default class ProjectFeed extends Component {
     let projectItems;
     if (this.props.projects) {
       projectItems = this.props.projects.map(project => {
-        return (
-          <ProjectItem key={project.title} project={project} />
-        );
+        return <ProjectLink key={project.title} project={project} />;
       });
     }
-    return (
-      <Fragment>
-        {projectItems}
-      </Fragment>
-    );
+    return {projectItems};
   }
 }
 
