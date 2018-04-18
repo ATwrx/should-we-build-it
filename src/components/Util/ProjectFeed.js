@@ -1,7 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ProjectItem from "../Layouts/ProjectItem";
+import { Query } from 'react-apollo';
+import { gql } from 'graphql-tag';
 
-class ProjectFeed extends Component {
+const projectQuery = {
+  query: gql`
+    query {
+      allProjects {
+        id
+        title
+        owner {
+          id
+          name
+        }
+        description
+        text
+      }
+    }
+  `,
+};
+
+export default class ProjectFeed extends Component {
   render() {
     let projectItems;
     if (this.props.projects) {
@@ -12,11 +31,14 @@ class ProjectFeed extends Component {
       });
     }
     return (
-      <div className="ProjectFeed">
+      <Fragment>
         {projectItems}
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default ProjectFeed;
+export const FEED_QUERY = gql`
+  query allProjects {
+
+  }

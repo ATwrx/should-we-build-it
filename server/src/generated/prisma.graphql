@@ -5,11 +5,40 @@
 # Model Types
 #
 
-type Post implements Node {
+type Comment implements Node {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user(where: UserWhereInput): User!
+  project(where: ProjectWhereInput): Project!
+  text: String!
+}
+
+type Project implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   isPublished: Boolean!
   title: String!
+  description: String!
   text: String!
+  upVotes: Int!
+  downVotes: Int!
+  owner(where: UserWhereInput): User!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+}
+
+type User implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String!
+  password: String!
+  role: Role!
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+  about: String
 }
 
 
@@ -17,7 +46,15 @@ type Post implements Node {
 # Other Types
 #
 
-type AggregatePost {
+type AggregateComment {
+  count: Int!
+}
+
+type AggregateProject {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -29,62 +66,9 @@ type BatchPayload {
 }
 
 """
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
-
-type Mutation {
-  createPost(data: PostCreateInput!): Post!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  deletePost(where: PostWhereUniqueInput!): Post
-  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  updateManyPosts(data: PostUpdateInput!, where: PostWhereInput!): BatchPayload!
-  deleteManyPosts(where: PostWhereInput!): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-"""
-An object with an ID
-"""
-interface Node {
-  """
-  The id of the object.
-  """
-  id: ID!
-}
-
-"""
-Information about pagination in a connection.
-"""
-type PageInfo {
-  """
-  When paginating forwards, are there more items?
-  """
-  hasNextPage: Boolean!
-  """
-  When paginating backwards, are there more items?
-  """
-  hasPreviousPage: Boolean!
-  """
-  When paginating backwards, the cursor to continue.
-  """
-  startCursor: String
-  """
-  When paginating forwards, the cursor to continue.
-  """
-  endCursor: String
-}
-
-"""
 A connection to a list of items.
 """
-type PostConnection {
+type CommentConnection {
   """
   Information to aid in pagination.
   """
@@ -92,68 +76,84 @@ type PostConnection {
   """
   A list of edges.
   """
-  edges: [PostEdge]!
-  aggregate: AggregatePost!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
 }
 
-input PostCreateInput {
-  isPublished: Boolean!
-  title: String!
+input CommentCreateInput {
   text: String!
+  user: UserCreateOneWithoutCommentsInput!
+  project: ProjectCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateManyWithoutProjectInput {
+  create: [CommentCreateWithoutProjectInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateManyWithoutUserInput {
+  create: [CommentCreateWithoutUserInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutProjectInput {
+  text: String!
+  user: UserCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateWithoutUserInput {
+  text: String!
+  project: ProjectCreateOneWithoutCommentsInput!
 }
 
 """
 An edge in a connection.
 """
-type PostEdge {
+type CommentEdge {
   """
   The item at the end of the edge.
   """
-  node: Post!
+  node: Comment!
   """
   A cursor for use in pagination.
   """
   cursor: String!
 }
 
-enum PostOrderByInput {
+enum CommentOrderByInput {
   id_ASC
   id_DESC
-  isPublished_ASC
-  isPublished_DESC
-  title_ASC
-  title_DESC
-  text_ASC
-  text_DESC
-  updatedAt_ASC
-  updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  text_ASC
+  text_DESC
 }
 
-type PostPreviousValues {
+type CommentPreviousValues {
   id: ID!
-  isPublished: Boolean!
-  title: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   text: String!
 }
 
-type PostSubscriptionPayload {
+type CommentSubscriptionPayload {
   mutation: MutationType!
-  node: Post
+  node: Comment
   updatedFields: [String!]
-  previousValues: PostPreviousValues
+  previousValues: CommentPreviousValues
 }
 
-input PostSubscriptionWhereInput {
+input CommentSubscriptionWhereInput {
   """
   Logical AND on all given filters.
   """
-  AND: [PostSubscriptionWhereInput!]
+  AND: [CommentSubscriptionWhereInput!]
   """
   Logical OR on all given filters.
   """
-  OR: [PostSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
   """
   The subscription event gets dispatched when it's listed in mutation_in
   """
@@ -170,24 +170,74 @@ input PostSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: PostWhereInput
+  node: CommentWhereInput
 }
 
-input PostUpdateInput {
-  isPublished: Boolean
-  title: String
+input CommentUpdateInput {
   text: String
+  user: UserUpdateOneWithoutCommentsInput
+  project: ProjectUpdateOneWithoutCommentsInput
 }
 
-input PostWhereInput {
+input CommentUpdateManyWithoutProjectInput {
+  create: [CommentCreateWithoutProjectInput!]
+  connect: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutProjectInput!]
+}
+
+input CommentUpdateManyWithoutUserInput {
+  create: [CommentCreateWithoutUserInput!]
+  connect: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CommentUpdateWithoutProjectDataInput {
+  text: String
+  user: UserUpdateOneWithoutCommentsInput
+}
+
+input CommentUpdateWithoutUserDataInput {
+  text: String
+  project: ProjectUpdateOneWithoutCommentsInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutProjectInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutProjectDataInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutUserInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutUserDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutProjectInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutProjectDataInput!
+  create: CommentCreateWithoutProjectInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutUserInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutUserDataInput!
+  create: CommentCreateWithoutUserInput!
+}
+
+input CommentWhereInput {
   """
   Logical AND on all given filters.
   """
-  AND: [PostWhereInput!]
+  AND: [CommentWhereInput!]
   """
   Logical OR on all given filters.
   """
-  OR: [PostWhereInput!]
+  OR: [CommentWhereInput!]
   id: ID
   """
   All values that are not equal to given value.
@@ -241,6 +291,514 @@ input PostWhereInput {
   All values not ending with the given string.
   """
   id_not_ends_with: ID
+  createdAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
+  text: String
+  """
+  All values that are not equal to given value.
+  """
+  text_not: String
+  """
+  All values that are contained in given list.
+  """
+  text_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  text_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  text_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  text_lte: String
+  """
+  All values greater than the given value.
+  """
+  text_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  text_gte: String
+  """
+  All values containing the given string.
+  """
+  text_contains: String
+  """
+  All values not containing the given string.
+  """
+  text_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  text_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  text_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  text_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  text_not_ends_with: String
+  user: UserWhereInput
+  project: ProjectWhereInput
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createProject(data: ProjectCreateInput!): Project!
+  createComment(data: CommentCreateInput!): Comment!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput!): BatchPayload!
+  updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput!): BatchPayload!
+  updateManyComments(data: CommentUpdateInput!, where: CommentWhereInput!): BatchPayload!
+  deleteManyUsers(where: UserWhereInput!): BatchPayload!
+  deleteManyProjects(where: ProjectWhereInput!): BatchPayload!
+  deleteManyComments(where: CommentWhereInput!): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""
+An object with an ID
+"""
+interface Node {
+  """
+  The id of the object.
+  """
+  id: ID!
+}
+
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+}
+
+"""
+A connection to a list of items.
+"""
+type ProjectConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+  """
+  A list of edges.
+  """
+  edges: [ProjectEdge]!
+  aggregate: AggregateProject!
+}
+
+input ProjectCreateInput {
+  isPublished: Boolean
+  title: String!
+  description: String!
+  text: String!
+  upVotes: Int
+  downVotes: Int
+  owner: UserCreateOneWithoutProjectsInput!
+  comments: CommentCreateManyWithoutProjectInput
+}
+
+input ProjectCreateManyWithoutOwnerInput {
+  create: [ProjectCreateWithoutOwnerInput!]
+  connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectCreateOneWithoutCommentsInput {
+  create: ProjectCreateWithoutCommentsInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutCommentsInput {
+  isPublished: Boolean
+  title: String!
+  description: String!
+  text: String!
+  upVotes: Int
+  downVotes: Int
+  owner: UserCreateOneWithoutProjectsInput!
+}
+
+input ProjectCreateWithoutOwnerInput {
+  isPublished: Boolean
+  title: String!
+  description: String!
+  text: String!
+  upVotes: Int
+  downVotes: Int
+  comments: CommentCreateManyWithoutProjectInput
+}
+
+"""
+An edge in a connection.
+"""
+type ProjectEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: Project!
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum ProjectOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  isPublished_ASC
+  isPublished_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  text_ASC
+  text_DESC
+  upVotes_ASC
+  upVotes_DESC
+  downVotes_ASC
+  downVotes_DESC
+}
+
+type ProjectPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isPublished: Boolean!
+  title: String!
+  description: String!
+  text: String!
+  upVotes: Int!
+  downVotes: Int!
+}
+
+type ProjectSubscriptionPayload {
+  mutation: MutationType!
+  node: Project
+  updatedFields: [String!]
+  previousValues: ProjectPreviousValues
+}
+
+input ProjectSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [ProjectSubscriptionWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
+  OR: [ProjectSubscriptionWhereInput!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ProjectWhereInput
+}
+
+input ProjectUpdateInput {
+  isPublished: Boolean
+  title: String
+  description: String
+  text: String
+  upVotes: Int
+  downVotes: Int
+  owner: UserUpdateOneWithoutProjectsInput
+  comments: CommentUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateManyWithoutOwnerInput {
+  create: [ProjectCreateWithoutOwnerInput!]
+  connect: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  delete: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutOwnerInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutOwnerInput!]
+}
+
+input ProjectUpdateOneWithoutCommentsInput {
+  create: ProjectCreateWithoutCommentsInput
+  connect: ProjectWhereUniqueInput
+  delete: Boolean
+  update: ProjectUpdateWithoutCommentsDataInput
+  upsert: ProjectUpsertWithoutCommentsInput
+}
+
+input ProjectUpdateWithoutCommentsDataInput {
+  isPublished: Boolean
+  title: String
+  description: String
+  text: String
+  upVotes: Int
+  downVotes: Int
+  owner: UserUpdateOneWithoutProjectsInput
+}
+
+input ProjectUpdateWithoutOwnerDataInput {
+  isPublished: Boolean
+  title: String
+  description: String
+  text: String
+  upVotes: Int
+  downVotes: Int
+  comments: CommentUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutOwnerInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutOwnerDataInput!
+}
+
+input ProjectUpsertWithoutCommentsInput {
+  update: ProjectUpdateWithoutCommentsDataInput!
+  create: ProjectCreateWithoutCommentsInput!
+}
+
+input ProjectUpsertWithWhereUniqueWithoutOwnerInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutOwnerDataInput!
+  create: ProjectCreateWithoutOwnerInput!
+}
+
+input ProjectWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [ProjectWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
+  OR: [ProjectWhereInput!]
+  id: ID
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  createdAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
   isPublished: Boolean
   """
   All values that are not equal to given value.
@@ -299,6 +857,59 @@ input PostWhereInput {
   All values not ending with the given string.
   """
   title_not_ends_with: String
+  description: String
+  """
+  All values that are not equal to given value.
+  """
+  description_not: String
+  """
+  All values that are contained in given list.
+  """
+  description_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  description_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  description_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  description_lte: String
+  """
+  All values greater than the given value.
+  """
+  description_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  description_gte: String
+  """
+  All values containing the given string.
+  """
+  description_contains: String
+  """
+  All values not containing the given string.
+  """
+  description_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  description_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  description_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  description_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  description_not_ends_with: String
   text: String
   """
   All values that are not equal to given value.
@@ -352,16 +963,85 @@ input PostWhereInput {
   All values not ending with the given string.
   """
   text_not_ends_with: String
+  upVotes: Int
+  """
+  All values that are not equal to given value.
+  """
+  upVotes_not: Int
+  """
+  All values that are contained in given list.
+  """
+  upVotes_in: [Int!]
+  """
+  All values that are not contained in given list.
+  """
+  upVotes_not_in: [Int!]
+  """
+  All values less than the given value.
+  """
+  upVotes_lt: Int
+  """
+  All values less than or equal the given value.
+  """
+  upVotes_lte: Int
+  """
+  All values greater than the given value.
+  """
+  upVotes_gt: Int
+  """
+  All values greater than or equal the given value.
+  """
+  upVotes_gte: Int
+  downVotes: Int
+  """
+  All values that are not equal to given value.
+  """
+  downVotes_not: Int
+  """
+  All values that are contained in given list.
+  """
+  downVotes_in: [Int!]
+  """
+  All values that are not contained in given list.
+  """
+  downVotes_not_in: [Int!]
+  """
+  All values less than the given value.
+  """
+  downVotes_lt: Int
+  """
+  All values less than or equal the given value.
+  """
+  downVotes_lte: Int
+  """
+  All values greater than the given value.
+  """
+  downVotes_gt: Int
+  """
+  All values greater than or equal the given value.
+  """
+  downVotes_gte: Int
+  owner: UserWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
 }
 
-input PostWhereUniqueInput {
+input ProjectWhereUniqueInput {
   id: ID
+  title: String
 }
 
 type Query {
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  post(where: PostWhereUniqueInput!): Post
-  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  user(where: UserWhereUniqueInput!): User
+  project(where: ProjectWhereUniqueInput!): Project
+  comment(where: CommentWhereUniqueInput!): Comment
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   """
   Fetches an object given its ID
   """
@@ -371,6 +1051,558 @@ type Query {
   id: ID!): Node
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 type Subscription {
-  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+}
+
+"""
+A connection to a list of items.
+"""
+type UserConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+  """
+  A list of edges.
+  """
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String!
+  password: String!
+  role: Role
+  about: String
+  projects: ProjectCreateManyWithoutOwnerInput
+  comments: CommentCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutProjectsInput {
+  create: UserCreateWithoutProjectsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCommentsInput {
+  name: String!
+  email: String!
+  password: String!
+  role: Role
+  about: String
+  projects: ProjectCreateManyWithoutOwnerInput
+}
+
+input UserCreateWithoutProjectsInput {
+  name: String!
+  email: String!
+  password: String!
+  role: Role
+  about: String
+  comments: CommentCreateManyWithoutUserInput
+}
+
+"""
+An edge in a connection.
+"""
+type UserEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: User!
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  role_ASC
+  role_DESC
+  about_ASC
+  about_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String!
+  password: String!
+  role: Role!
+  about: String
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [UserSubscriptionWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
+  OR: [UserSubscriptionWhereInput!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+  role: Role
+  about: String
+  projects: ProjectUpdateManyWithoutOwnerInput
+  comments: CommentUpdateManyWithoutUserInput
+}
+
+input UserUpdateOneWithoutCommentsInput {
+  create: UserCreateWithoutCommentsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutCommentsDataInput
+  upsert: UserUpsertWithoutCommentsInput
+}
+
+input UserUpdateOneWithoutProjectsInput {
+  create: UserCreateWithoutProjectsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutProjectsDataInput
+  upsert: UserUpsertWithoutProjectsInput
+}
+
+input UserUpdateWithoutCommentsDataInput {
+  name: String
+  email: String
+  password: String
+  role: Role
+  about: String
+  projects: ProjectUpdateManyWithoutOwnerInput
+}
+
+input UserUpdateWithoutProjectsDataInput {
+  name: String
+  email: String
+  password: String
+  role: Role
+  about: String
+  comments: CommentUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutCommentsInput {
+  update: UserUpdateWithoutCommentsDataInput!
+  create: UserCreateWithoutCommentsInput!
+}
+
+input UserUpsertWithoutProjectsInput {
+  update: UserUpdateWithoutProjectsDataInput!
+  create: UserCreateWithoutProjectsInput!
+}
+
+input UserWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [UserWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
+  OR: [UserWhereInput!]
+  id: ID
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  createdAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
+  name: String
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  email: String
+  """
+  All values that are not equal to given value.
+  """
+  email_not: String
+  """
+  All values that are contained in given list.
+  """
+  email_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  email_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  email_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  email_lte: String
+  """
+  All values greater than the given value.
+  """
+  email_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  email_gte: String
+  """
+  All values containing the given string.
+  """
+  email_contains: String
+  """
+  All values not containing the given string.
+  """
+  email_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  email_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  email_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  email_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  email_not_ends_with: String
+  password: String
+  """
+  All values that are not equal to given value.
+  """
+  password_not: String
+  """
+  All values that are contained in given list.
+  """
+  password_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  password_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  password_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  password_lte: String
+  """
+  All values greater than the given value.
+  """
+  password_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  password_gte: String
+  """
+  All values containing the given string.
+  """
+  password_contains: String
+  """
+  All values not containing the given string.
+  """
+  password_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  password_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  password_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  password_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  password_not_ends_with: String
+  role: Role
+  """
+  All values that are not equal to given value.
+  """
+  role_not: Role
+  """
+  All values that are contained in given list.
+  """
+  role_in: [Role!]
+  """
+  All values that are not contained in given list.
+  """
+  role_not_in: [Role!]
+  about: String
+  """
+  All values that are not equal to given value.
+  """
+  about_not: String
+  """
+  All values that are contained in given list.
+  """
+  about_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
+  about_not_in: [String!]
+  """
+  All values less than the given value.
+  """
+  about_lt: String
+  """
+  All values less than or equal the given value.
+  """
+  about_lte: String
+  """
+  All values greater than the given value.
+  """
+  about_gt: String
+  """
+  All values greater than or equal the given value.
+  """
+  about_gte: String
+  """
+  All values containing the given string.
+  """
+  about_contains: String
+  """
+  All values not containing the given string.
+  """
+  about_not_contains: String
+  """
+  All values starting with the given string.
+  """
+  about_starts_with: String
+  """
+  All values not starting with the given string.
+  """
+  about_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
+  about_ends_with: String
+  """
+  All values not ending with the given string.
+  """
+  about_not_ends_with: String
+  projects_every: ProjectWhereInput
+  projects_some: ProjectWhereInput
+  projects_none: ProjectWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  name: String
+  email: String
 }
