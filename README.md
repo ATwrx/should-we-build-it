@@ -5,48 +5,66 @@ This app was created to answer the age old question of "should I build it?".
 
 The goal of this project is to give developers a space to share idea's, seek contributers, and just see if the project is even worth the effort. 
 
+#### Docker is required to deploy a local server. Otherwise you can deploy a prisma dev server.
 
-To contribute: 
----------------
+#### Install prisma and graphql-cli
 
-First install yarn. 
-
-#### To see if you already have yarn installed
-
-```
-yarn -v
+```shell
+npm i -g prisma
+npm i -g graphql-cli
 ```
 
-If you get a version number then it's already installed.
+or
 
-#### Install yarn & graphcool cli tool
-
-```
-npm i -g yarn
-npm i -g graphcool
+```shell
+yarn global add prisma
+yarn global add graphql-cli
 ```
 
-#### 
+then
 
 ```
 git clone https://github.com/ATwrx/should-we-build-it
 ```
 
-Now, to start the client 
 
+### Deploy a local Prisma Server
+```shell
+cd should-we-build-it/server
+prisma deploy
 ```
-cd should-we-build-it/client
+
+Choose the local version if you have Docker installed.
+Otherwise, deploy to a prisma dev server.
+This might require extra configuration though.
+Then: 
+
+```shell
+npm install
+npm start
+```
+or
+```
 yarn install
 yarn start
 ```
 
-If you'd like to see the grapgql playground:
 
+### Now, to start the react client 
+
+```shell
+cd ../
+npm install
+npm start
 ```
-cd should-we-build-it/server
-yarn install 
-graphcool playground
+
+or
+
+```shell
+yarn install
+yarn start
 ```
+
 
 #### You're all set
 
