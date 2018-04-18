@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Container, Grid} from 'semantic-ui-react';
 
 import {ProjectForm, NavMenu, ProjectFeed} from '../Util';
-import {TitleBar, Profile} from '../Layouts';
+import {TitleBar, Profile, ProjectItem} from '../Layouts';
 
 class Body extends Component {
   state = {
@@ -28,7 +28,8 @@ class Body extends Component {
               <Switch>
                 <Route path="/" exact component={ProjectFeed} />
                 <Route path="/add-project" component={ProjectForm} />
-                <Route path="/profile" component={Profile} />
+                <Route path="/profile:id" component={Profile} />
+                <Route path="/project:id" component={ProjectItem} />
               </Switch>
             </Grid.Column>
           </Grid>
