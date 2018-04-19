@@ -1,11 +1,25 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "My Graphcool Service",
+  "name": "should-we-build-it-server",
+  "scripts": {
+    "start": "node src/index.js",
+    "playground": "prisma playground",
+    "dev": "npm-run-all --parallel start playground",
+    "prisma": "prisma"
+  },
   "dependencies": {
-    "graphcool-lib": "^0.1.0",
-    "isomorphic-fetch": "^2.2.1",
-    "jsonwebtoken": "^8.1.0",
-    "jwks-rsa": "^1.2.1"
+    "bcryptjs": "2.4.3",
+    "graphql-yoga": "1.8.5",
+    "jsonwebtoken": "8.2.1",
+    "prisma-binding": "1.5.17"
+  },
+  "devDependencies": {
+    "dotenv": "5.0.1",
+    "graphql-cli": "2.15.9",
+    "nodemon": "1.17.3",
+    "npm-run-all": "4.1.2",
+    "prisma": "1.4.0"
+  },
+  "resolutions": {
+    "graphql": "0.13.1"
   }
 }

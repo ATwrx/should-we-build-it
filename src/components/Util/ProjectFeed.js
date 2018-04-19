@@ -3,22 +3,22 @@ import { Query } from 'react-apollo';
 import { gql } from 'graphql-tag';
 import { ProjectLink } from '../Layouts/';
 
-const projectQuery = {
-  query: gql`
-    query {
-      allProjects {
-        id
-        title
-        owner {
-          id
-          name
-        }
-        description
-        text
-      }
-    }
-  `,
-};
+// const projectQuery = {
+//   query: gql`
+//     query {
+//       allProjects {
+//         id
+//         title
+//         owner {
+//           id
+//           name
+//         }
+//         description
+//         text
+//       }
+//     }
+//   `,
+// };
 
 export default class ProjectFeed extends Component {
   render() {
@@ -32,7 +32,3 @@ export default class ProjectFeed extends Component {
   }
 }
 
-export const FEED_QUERY = gql`
-  query allProjects {
-
-  }

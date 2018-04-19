@@ -6,7 +6,8 @@ import ApolloClient from 'apollo-boost';
 
 import {Body} from './components/Layouts';
 const client = new ApolloClient({
-  uri: 'http://localhost:4000'
+  uri: 'http://localhost:4466',
+  secret: 'appsecretshh'
   // uri: 'https://api.graph.cool/simple/v2/cjfrlkion2tff0153twgaeh4c',
 });
 

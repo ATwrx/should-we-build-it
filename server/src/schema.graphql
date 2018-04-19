@@ -2,12 +2,32 @@
 
 type Query {
   feed: [Project!]!
-  drafts: [Post!]!
-  post(id: ID!): Post
+  drafts: [Project!]!
+  project(id: ID!): Project
+  me: User
+  user(id: ID!): User
 }
 
 type Mutation {
-  createDraft(title: String!, text: String): Post
-  deletePost(id: ID!): Post
-  publish(id: ID!): Post
+  signup(name: String!, password: String!, email: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  createDraft(title: String!, description: String!,  text: String!, ): Project!
+  deleteProject(id: ID!): Project!
+  publish(id: ID!): Project!
+}
+
+type Subscription {
+  feedSubscription: ProjectSubscriptionPayload!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  projects: [Project!]!
 }

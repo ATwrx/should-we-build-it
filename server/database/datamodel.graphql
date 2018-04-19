@@ -1,5 +1,3 @@
-# import Project from "./generated/prisma.graphql"
-
 # defines interface for any object with an ID
 interface Node {
   id: ID! @unique
@@ -16,7 +14,6 @@ type User implements Node {
   password: String!
   role: Role! @default(value: "USER")
   projects: [Project!]! @relation(name: "ProjectOwner", onDelete: CASCADE)
-  comments: [Comment!]!  @relation(name: "CommentOwner", onDelete: CASCADE)
   about: String
 }
 
@@ -31,14 +28,4 @@ type Project implements Node {
    upVotes: Int! @default(value: 0)
    downVotes: Int! @default(value: 0)
    owner: User! @relation(name: "ProjectOwner", onDelete: SET_NULL)
-   comments: [Comment!]! @relation(name: "Comments", onDelete: CASCADE)
-}
-
-type Comment implements Node  {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  user: User! @relation(name: "CommentOwner", onDelete: SET_NULL)
-  project:  Project! @relation(name: "Comments", onDelete: SET_NULL)
-  text: String!
 }

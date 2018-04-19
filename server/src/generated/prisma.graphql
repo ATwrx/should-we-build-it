@@ -5,15 +5,6 @@
 # Model Types
 #
 
-type Comment implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  user(where: UserWhereInput): User!
-  project(where: ProjectWhereInput): Project!
-  text: String!
-}
-
 type Project implements Node {
   id: ID!
   createdAt: DateTime!
@@ -25,7 +16,6 @@ type Project implements Node {
   upVotes: Int!
   downVotes: Int!
   owner(where: UserWhereInput): User!
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
 }
 
 type User implements Node {
@@ -37,7 +27,6 @@ type User implements Node {
   password: String!
   role: Role!
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
   about: String
 }
 
@@ -45,10 +34,6 @@ type User implements Node {
 #
 # Other Types
 #
-
-type AggregateComment {
-  count: Int!
-}
 
 type AggregateProject {
   count: Int!
@@ -65,351 +50,6 @@ type BatchPayload {
   count: Long!
 }
 
-"""
-A connection to a list of items.
-"""
-type CommentConnection {
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
-  edges: [CommentEdge]!
-  aggregate: AggregateComment!
-}
-
-input CommentCreateInput {
-  text: String!
-  user: UserCreateOneWithoutCommentsInput!
-  project: ProjectCreateOneWithoutCommentsInput!
-}
-
-input CommentCreateManyWithoutProjectInput {
-  create: [CommentCreateWithoutProjectInput!]
-  connect: [CommentWhereUniqueInput!]
-}
-
-input CommentCreateManyWithoutUserInput {
-  create: [CommentCreateWithoutUserInput!]
-  connect: [CommentWhereUniqueInput!]
-}
-
-input CommentCreateWithoutProjectInput {
-  text: String!
-  user: UserCreateOneWithoutCommentsInput!
-}
-
-input CommentCreateWithoutUserInput {
-  text: String!
-  project: ProjectCreateOneWithoutCommentsInput!
-}
-
-"""
-An edge in a connection.
-"""
-type CommentEdge {
-  """
-  The item at the end of the edge.
-  """
-  node: Comment!
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-}
-
-enum CommentOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  text_ASC
-  text_DESC
-}
-
-type CommentPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  text: String!
-}
-
-type CommentSubscriptionPayload {
-  mutation: MutationType!
-  node: Comment
-  updatedFields: [String!]
-  previousValues: CommentPreviousValues
-}
-
-input CommentSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [CommentSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [CommentSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: CommentWhereInput
-}
-
-input CommentUpdateInput {
-  text: String
-  user: UserUpdateOneWithoutCommentsInput
-  project: ProjectUpdateOneWithoutCommentsInput
-}
-
-input CommentUpdateManyWithoutProjectInput {
-  create: [CommentCreateWithoutProjectInput!]
-  connect: [CommentWhereUniqueInput!]
-  disconnect: [CommentWhereUniqueInput!]
-  delete: [CommentWhereUniqueInput!]
-  update: [CommentUpdateWithWhereUniqueWithoutProjectInput!]
-  upsert: [CommentUpsertWithWhereUniqueWithoutProjectInput!]
-}
-
-input CommentUpdateManyWithoutUserInput {
-  create: [CommentCreateWithoutUserInput!]
-  connect: [CommentWhereUniqueInput!]
-  disconnect: [CommentWhereUniqueInput!]
-  delete: [CommentWhereUniqueInput!]
-  update: [CommentUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput!]
-}
-
-input CommentUpdateWithoutProjectDataInput {
-  text: String
-  user: UserUpdateOneWithoutCommentsInput
-}
-
-input CommentUpdateWithoutUserDataInput {
-  text: String
-  project: ProjectUpdateOneWithoutCommentsInput
-}
-
-input CommentUpdateWithWhereUniqueWithoutProjectInput {
-  where: CommentWhereUniqueInput!
-  data: CommentUpdateWithoutProjectDataInput!
-}
-
-input CommentUpdateWithWhereUniqueWithoutUserInput {
-  where: CommentWhereUniqueInput!
-  data: CommentUpdateWithoutUserDataInput!
-}
-
-input CommentUpsertWithWhereUniqueWithoutProjectInput {
-  where: CommentWhereUniqueInput!
-  update: CommentUpdateWithoutProjectDataInput!
-  create: CommentCreateWithoutProjectInput!
-}
-
-input CommentUpsertWithWhereUniqueWithoutUserInput {
-  where: CommentWhereUniqueInput!
-  update: CommentUpdateWithoutUserDataInput!
-  create: CommentCreateWithoutUserInput!
-}
-
-input CommentWhereInput {
-  """
-  Logical AND on all given filters.
-  """
-  AND: [CommentWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
-  OR: [CommentWhereInput!]
-  id: ID
-  """
-  All values that are not equal to given value.
-  """
-  id_not: ID
-  """
-  All values that are contained in given list.
-  """
-  id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
-  id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
-  id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
-  id_lte: ID
-  """
-  All values greater than the given value.
-  """
-  id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
-  id_gte: ID
-  """
-  All values containing the given string.
-  """
-  id_contains: ID
-  """
-  All values not containing the given string.
-  """
-  id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
-  id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
-  id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
-  id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
-  id_not_ends_with: ID
-  createdAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
-  createdAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
-  createdAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
-  createdAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
-  createdAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
-  createdAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
-  createdAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
-  updatedAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
-  updatedAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
-  updatedAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
-  updatedAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
-  updatedAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
-  updatedAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
-  updatedAt_gte: DateTime
-  text: String
-  """
-  All values that are not equal to given value.
-  """
-  text_not: String
-  """
-  All values that are contained in given list.
-  """
-  text_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
-  text_not_in: [String!]
-  """
-  All values less than the given value.
-  """
-  text_lt: String
-  """
-  All values less than or equal the given value.
-  """
-  text_lte: String
-  """
-  All values greater than the given value.
-  """
-  text_gt: String
-  """
-  All values greater than or equal the given value.
-  """
-  text_gte: String
-  """
-  All values containing the given string.
-  """
-  text_contains: String
-  """
-  All values not containing the given string.
-  """
-  text_not_contains: String
-  """
-  All values starting with the given string.
-  """
-  text_starts_with: String
-  """
-  All values not starting with the given string.
-  """
-  text_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
-  text_ends_with: String
-  """
-  All values not ending with the given string.
-  """
-  text_not_ends_with: String
-  user: UserWhereInput
-  project: ProjectWhereInput
-}
-
-input CommentWhereUniqueInput {
-  id: ID
-}
-
 scalar DateTime
 
 """
@@ -421,22 +61,16 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createProject(data: ProjectCreateInput!): Project!
-  createComment(data: CommentCreateInput!): Comment!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
-  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
   deleteUser(where: UserWhereUniqueInput!): User
   deleteProject(where: ProjectWhereUniqueInput!): Project
-  deleteComment(where: CommentWhereUniqueInput!): Comment
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
-  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput!): BatchPayload!
-  updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput!): BatchPayload!
-  updateManyComments(data: CommentUpdateInput!, where: CommentWhereInput!): BatchPayload!
-  deleteManyUsers(where: UserWhereInput!): BatchPayload!
-  deleteManyProjects(where: ProjectWhereInput!): BatchPayload!
-  deleteManyComments(where: CommentWhereInput!): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -500,27 +134,11 @@ input ProjectCreateInput {
   upVotes: Int
   downVotes: Int
   owner: UserCreateOneWithoutProjectsInput!
-  comments: CommentCreateManyWithoutProjectInput
 }
 
 input ProjectCreateManyWithoutOwnerInput {
   create: [ProjectCreateWithoutOwnerInput!]
   connect: [ProjectWhereUniqueInput!]
-}
-
-input ProjectCreateOneWithoutCommentsInput {
-  create: ProjectCreateWithoutCommentsInput
-  connect: ProjectWhereUniqueInput
-}
-
-input ProjectCreateWithoutCommentsInput {
-  isPublished: Boolean
-  title: String!
-  description: String!
-  text: String!
-  upVotes: Int
-  downVotes: Int
-  owner: UserCreateOneWithoutProjectsInput!
 }
 
 input ProjectCreateWithoutOwnerInput {
@@ -530,7 +148,6 @@ input ProjectCreateWithoutOwnerInput {
   text: String!
   upVotes: Int
   downVotes: Int
-  comments: CommentCreateManyWithoutProjectInput
 }
 
 """
@@ -623,7 +240,6 @@ input ProjectUpdateInput {
   upVotes: Int
   downVotes: Int
   owner: UserUpdateOneWithoutProjectsInput
-  comments: CommentUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateManyWithoutOwnerInput {
@@ -635,24 +251,6 @@ input ProjectUpdateManyWithoutOwnerInput {
   upsert: [ProjectUpsertWithWhereUniqueWithoutOwnerInput!]
 }
 
-input ProjectUpdateOneWithoutCommentsInput {
-  create: ProjectCreateWithoutCommentsInput
-  connect: ProjectWhereUniqueInput
-  delete: Boolean
-  update: ProjectUpdateWithoutCommentsDataInput
-  upsert: ProjectUpsertWithoutCommentsInput
-}
-
-input ProjectUpdateWithoutCommentsDataInput {
-  isPublished: Boolean
-  title: String
-  description: String
-  text: String
-  upVotes: Int
-  downVotes: Int
-  owner: UserUpdateOneWithoutProjectsInput
-}
-
 input ProjectUpdateWithoutOwnerDataInput {
   isPublished: Boolean
   title: String
@@ -660,17 +258,11 @@ input ProjectUpdateWithoutOwnerDataInput {
   text: String
   upVotes: Int
   downVotes: Int
-  comments: CommentUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithWhereUniqueWithoutOwnerInput {
   where: ProjectWhereUniqueInput!
   data: ProjectUpdateWithoutOwnerDataInput!
-}
-
-input ProjectUpsertWithoutCommentsInput {
-  update: ProjectUpdateWithoutCommentsDataInput!
-  create: ProjectCreateWithoutCommentsInput!
 }
 
 input ProjectUpsertWithWhereUniqueWithoutOwnerInput {
@@ -1022,9 +614,6 @@ input ProjectWhereInput {
   """
   downVotes_gte: Int
   owner: UserWhereInput
-  comments_every: CommentWhereInput
-  comments_some: CommentWhereInput
-  comments_none: CommentWhereInput
 }
 
 input ProjectWhereUniqueInput {
@@ -1035,13 +624,10 @@ input ProjectWhereUniqueInput {
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
-  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
   user(where: UserWhereUniqueInput!): User
   project(where: ProjectWhereUniqueInput!): Project
-  comment(where: CommentWhereUniqueInput!): Comment
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
-  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   """
   Fetches an object given its ID
   """
@@ -1059,7 +645,6 @@ enum Role {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
-  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
 }
 
 """
@@ -1084,26 +669,11 @@ input UserCreateInput {
   role: Role
   about: String
   projects: ProjectCreateManyWithoutOwnerInput
-  comments: CommentCreateManyWithoutUserInput
-}
-
-input UserCreateOneWithoutCommentsInput {
-  create: UserCreateWithoutCommentsInput
-  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutProjectsInput {
   create: UserCreateWithoutProjectsInput
   connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutCommentsInput {
-  name: String!
-  email: String!
-  password: String!
-  role: Role
-  about: String
-  projects: ProjectCreateManyWithoutOwnerInput
 }
 
 input UserCreateWithoutProjectsInput {
@@ -1112,7 +682,6 @@ input UserCreateWithoutProjectsInput {
   password: String!
   role: Role
   about: String
-  comments: CommentCreateManyWithoutUserInput
 }
 
 """
@@ -1201,15 +770,6 @@ input UserUpdateInput {
   role: Role
   about: String
   projects: ProjectUpdateManyWithoutOwnerInput
-  comments: CommentUpdateManyWithoutUserInput
-}
-
-input UserUpdateOneWithoutCommentsInput {
-  create: UserCreateWithoutCommentsInput
-  connect: UserWhereUniqueInput
-  delete: Boolean
-  update: UserUpdateWithoutCommentsDataInput
-  upsert: UserUpsertWithoutCommentsInput
 }
 
 input UserUpdateOneWithoutProjectsInput {
@@ -1220,27 +780,12 @@ input UserUpdateOneWithoutProjectsInput {
   upsert: UserUpsertWithoutProjectsInput
 }
 
-input UserUpdateWithoutCommentsDataInput {
-  name: String
-  email: String
-  password: String
-  role: Role
-  about: String
-  projects: ProjectUpdateManyWithoutOwnerInput
-}
-
 input UserUpdateWithoutProjectsDataInput {
   name: String
   email: String
   password: String
   role: Role
   about: String
-  comments: CommentUpdateManyWithoutUserInput
-}
-
-input UserUpsertWithoutCommentsInput {
-  update: UserUpdateWithoutCommentsDataInput!
-  create: UserCreateWithoutCommentsInput!
 }
 
 input UserUpsertWithoutProjectsInput {
@@ -1596,9 +1141,6 @@ input UserWhereInput {
   projects_every: ProjectWhereInput
   projects_some: ProjectWhereInput
   projects_none: ProjectWhereInput
-  comments_every: CommentWhereInput
-  comments_some: CommentWhereInput
-  comments_none: CommentWhereInput
 }
 
 input UserWhereUniqueInput {

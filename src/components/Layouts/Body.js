@@ -26,7 +26,7 @@ class Body extends Component {
             </Grid.Column>
             <Grid.Column stretch="true" width={12}>
               <Switch>
-                <Route path="/" exact component={ProjectFeed} />
+                <Route path="/" exact component={TitleBar} />
                 <Route path="/add-project" component={ProjectForm} />
                 <Route path="/profile:id" component={Profile} />
                 <Route path="/project:id" component={ProjectItem} />
