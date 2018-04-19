@@ -19,6 +19,7 @@ server/node_modules
 .env
 
 config/config.json
+/.idea
 
 npm-debug.log*
 yarn-debug.log*
