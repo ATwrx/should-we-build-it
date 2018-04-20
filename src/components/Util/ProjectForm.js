@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
+import gql from 'graphql-tag'
 import {Form, TextArea, Button} from 'semantic-ui-react';
 
 class ProjectForm extends Component {
   state = {
     title: '',
-    submittedTitle: '',
-    slug: '',
-    submittedSlug: '',
     description: '',
-    submittedDescription: '',
     text: '',
+    submittedTitle: '',
+    submittedDescription: '',
     submittedText: '',
   };
 
-  static categories = ['Web Site', 'Web App', 'Mobile App'];
 
   handleChange = name => event => {
     this.setState({
@@ -24,21 +22,19 @@ class ProjectForm extends Component {
   handleChange = (e, {name, value}) => this.setState({[name]: value});
 
   handleSubmit = () => {
-    const {title, slug, description, text} = this.state;
+    const {title, description, text} = this.state;
     this.setState({
       submittedTitle: title,
-      submittedSlug: slug,
       submittedDescription: description,
       submittedText: text,
     });
   };
 
   render() {
-    const {title, slug, text, description} = this.state;
+    const {title, text, description} = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group>
           <Form.Input
             placeholder="Project Title"
             name="title"
@@ -46,14 +42,8 @@ class ProjectForm extends Component {
             onChange={this.handleChange}
           />
 
-          <Form.Input
-            placeholder="this-is-a-slug"
-            name="slug"
-            value={slug}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
 
+        <Form.Group>
         <div className="textAreaWrapper input">
           <TextArea
             placeholder="Write a brief summary of your idea..."
@@ -73,6 +63,7 @@ class ProjectForm extends Component {
             autoHeight
           />
         </div>
+        </Form.Group>
 
         <Button content="Submit" type="submit" />
       </Form>

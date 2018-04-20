@@ -1,12 +1,14 @@
 mutation {
-  first: createUser(data: {
-    title: "Hello World"
-    text: "This is my first blog post ever!"
-    isPublished: true
-  }) {
+  first: reateUser(data:{
+    name: "admin"
+    email: "act.webdesigns@gmail.com"
+    password: "dishrag25"
+    role: ADMIN
+  }){
     id
   }
-  
+
+
   second: createPost(data: {
     title: "My Second Post"
     text: "My first post was good, but this one is better!"

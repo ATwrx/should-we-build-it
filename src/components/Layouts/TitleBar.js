@@ -1,19 +1,34 @@
 import React, {Component} from 'react';
-import {Header, Container, Divider} from 'semantic-ui-react';
+import {Menu} from 'semantic-ui-react';
+import {NavLink} from 'react-router-dom';
 
-class NavBar extends Component {
+class TitleBar extends Component {
   render() {
     return (
-      <Container
-        textAlign="center"
-        fluid >
-        <Header as="h1" color="blue" > 
+      <Menu fluid>
+        <Menu.Item header color="blue">
           Should We Build It?
-        </Header>
-        <Divider section />
-      </Container>
+        </Menu.Item>
+
+          <Menu.Item as={NavLink} to="/explore">
+            Explore
+          </Menu.Item>
+          <Menu.Item as={NavLink} to="/add-project">
+            Add Project
+          </Menu.Item>
+          <Menu.Item as={NavLink} to="/profile" >
+            Profile
+          </Menu.Item>
+
+        <Menu.Menu position="right">
+          <Menu.Item as={NavLink} to="/login">
+            {' '}
+            Login
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
     );
   }
 }
 
-export default NavBar;
+export default TitleBar;
