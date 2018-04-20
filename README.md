@@ -11,13 +11,6 @@ The goal of this project is to give developers a space to share idea's, seek con
 ### You can also use npm
 
 ```shell
-npm i -g prisma
-npm i -g graphql-cli
-```
-
-or
-
-```shell
 yarn global add prisma
 yarn global add graphql-cli
 ```
@@ -40,11 +33,6 @@ Otherwise, deploy to a prisma dev server.
 This might require extra configuration though.
 Then: 
 
-```shell
-npm install
-npm start
-```
-or
 ```
 yarn install
 yarn start
@@ -54,18 +42,9 @@ yarn start
 ### Now, to start the react client 
 
 ```shell
-cd ../
-npm install
-npm start
-```
-
-or
-
-```shell
 yarn install
 yarn start
 ```
-
 
 #### You're all set
 
