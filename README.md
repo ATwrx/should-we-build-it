@@ -35,6 +35,10 @@ Then:
 
 ```
 yarn install
+yarn dev 
+
+# if you don't want to start the Graphql Playground
+# run this instead of yarn dev
 yarn start
 ```
 
