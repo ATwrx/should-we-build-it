@@ -41,6 +41,7 @@ yarn start
 
 ### Now, to start the react client 
 ```shell
+cd ../
 yarn install
 yarn start
 ```
