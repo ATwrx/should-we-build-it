@@ -5,10 +5,15 @@ This app was created to answer the age old question of "should I build it?".
 
 The goal of this project is to give developers a space to share idea's, seek contributers, and just see if the project is even worth the effort. 
 
+### Requirements
+#### Node.js 
+
+### Optional
+#### Yarn to substitute npm
 #### Docker is required to deploy a local server. Otherwise you can deploy a prisma dev server.
 
-#### Install prisma and graphql-cli
-### You can also use npm
+### Install prisma and graphql-cli
+#### You can also use npm
 
 ```shell
 yarn global add prisma
