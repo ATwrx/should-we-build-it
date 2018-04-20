@@ -8,6 +8,7 @@ The goal of this project is to give developers a space to share idea's, seek con
 #### Docker is required to deploy a local server. Otherwise you can deploy a prisma dev server.
 
 #### Install prisma and graphql-cli
+### You can also use npm
 
 ```shell
 npm i -g prisma
