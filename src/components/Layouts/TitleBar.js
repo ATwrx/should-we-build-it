@@ -20,6 +20,9 @@ class TitleBar extends Component {
             Profile
           </Menu.Item>
 
+          <Menu.Item as={NavLink} to="/project" >
+            Profile
+          </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item as={NavLink} to="/login">
             {' '}
