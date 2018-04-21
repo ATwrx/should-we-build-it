@@ -2,6 +2,19 @@ import React, {Component, Fragment} from 'react';
 import {Grid, Header, Divider, Segment, Button, Form} from 'semantic-ui-react';
 
 export default class Welcome extends Component {
+  state = {
+    loginEmail: '',
+    loginPass: '',
+    submittedEmail: '',
+    submittedPass: '',
+  };
+
+  handleLogin = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
   render() {
     return (
       <Fragment>

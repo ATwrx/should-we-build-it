@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import gql from 'graphql-tag'
-import {Form, TextArea, Button} from 'semantic-ui-react';
+import {Grid, Segment, Form, TextArea, Button} from 'semantic-ui-react';
 
 class ProjectForm extends Component {
   state = {
@@ -10,13 +10,6 @@ class ProjectForm extends Component {
     submittedTitle: '',
     submittedDescription: '',
     submittedText: '',
-  };
-
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
   };
 
   handleChange = (e, {name, value}) => this.setState({[name]: value});
@@ -34,7 +27,8 @@ class ProjectForm extends Component {
     const {title, text, description} = this.state;
     return (
       <Form onSubmit={this.handleSubmit}>
-
+      <Grid columns={3}>
+        <Grid.Column> 
           <Form.Input
             placeholder="Project Title"
             name="title"
@@ -43,7 +37,7 @@ class ProjectForm extends Component {
           />
 
 
-        <Form.Group>
+      </Grid.Column>
         <div className="textAreaWrapper input">
           <TextArea
             placeholder="Write a brief summary of your idea..."
@@ -63,9 +57,10 @@ class ProjectForm extends Component {
             autoHeight
           />
         </div>
-        </Form.Group>
 
+      </Grid>
         <Button content="Submit" type="submit" />
+
       </Form>
     );
   }

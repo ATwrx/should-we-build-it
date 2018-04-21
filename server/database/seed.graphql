@@ -1,5 +1,5 @@
 mutation {
-  first: reateUser(data:{
+  first: createUser(data:{
     name: "admin"
     email: "act.webdesigns@gmail.com"
     password: "dishrag25"

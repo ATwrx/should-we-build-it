@@ -1,11 +1,6 @@
-# defines interface for any object with an ID
-interface Node {
-  id: ID! @unique
-}
-
 # main type definitions
 
-type User implements Node {
+type User {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -17,7 +12,7 @@ type User implements Node {
   about: String
 }
 
-type Project implements Node {
+type Project {
    id: ID! @unique
    createdAt: DateTime!
    updatedAt: DateTime!
