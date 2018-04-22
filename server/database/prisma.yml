@@ -1,12 +1,12 @@
 # the name for the service (will be part of the service's HTTP endpoint)
-service: should-we-build-it
+service: swbi-prisma
 
 # the cluster and stage the service is deployed to
 stage: dev
 
 # to disable authentication:
 disableAuth: true
-# secret: secretshh
+#secret: secretshh
 
 # the file path pointing to your data model
 datamodel:
@@ -14,7 +14,7 @@ datamodel:
   - enums.graphql
 
 # seed your service with initial data based on seed.graphql
-# seed:
-#   import: seed.graphql
+seed:
+  import: seed.graphql
 
 cluster: local
