@@ -5,6 +5,10 @@ export default class Welcome extends Component {
   state = {
     loginEmail: '',
     loginPass: '',
+    signupName: '',
+    signupEmail: '',
+    signupPass: '',
+    signupPassConfirm: '',
     submittedEmail: '',
     submittedPass: '',
   };
@@ -22,27 +26,32 @@ export default class Welcome extends Component {
           <Segment>
             <Header as="h1"> Welcome! </Header>
           </Segment>
-          <Segment>
-            <Form>
-              <Form.Input
-                icon="user"
-                iconPosition="left"
-                placeholder="E-mail address"
-              />
+          <Grid columns={2}>
+            <Grid.Column>
+              <Segment>
+                <Form>
+                  <Form.Input
+                    icon="user"
+                    iconPosition="left"
+                    placeholder="E-mail address"
+                  />
 
-              <Form.Input
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-              />
-            </Form>
-          </Segment>
-          <Segment>
-            <Button color="teal" fluid size="large" attached="top">
-              Login
-            </Button>
-          </Segment>
+                  <Form.Input
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                  />
+                </Form>
+              </Segment>
+              <Segment>
+                <Button color="teal" fluid size="large" attached="top">
+                  Login
+                </Button>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column />
+          </Grid>
         </Segment.Group>
       </Fragment>
     );

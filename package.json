@@ -1,6 +1,5 @@
 {
   "name": "Should-We-Build-It",
-  "version": "0.2",
   "private": true,
   "devDependencies": {
     "react-scripts": "^1.0.16"

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Container} from 'semantic-ui-react';
-import {ProjectForm, ProjectFeed, Dashboard} from './components/Util';
-import {TitleBar, Profile, ProjectItem, Welcome} from './components/Layouts';
+import {Dashboard, ProjectFeed, Drafts, ProjectForm} from './components/Util';
+import {TitleBar, Welcome, Profile, ProjectItem, } from './components/Layouts';
 
 class App extends Component {
   state = {
-    isUser: true,
+    isUser: false,
   };
 
   render() {
@@ -16,7 +16,7 @@ class App extends Component {
               <TitleBar />
               <Container style={{padding: '5em 0em'}}>
               <Switch >
-                <Route path="/welcome" component={Welcome} />
+                {/* <Route path="/" component={Welcome} /> */}
                 <Route path="/explore" component={ProjectFeed} />
                 <Route path="/add-project" component={ProjectForm} />
                 <Route path="/profile:id" component={Profile} />

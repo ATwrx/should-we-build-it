@@ -2,11 +2,11 @@
 service: swbi-prisma
 
 # the cluster and stage the service is deployed to
-stage: dev
+stage: ${env:PRISMA_STAGE}
 
 # to disable authentication:
-disableAuth: true
-#secret: secretshh
+# disableAuth: true
+secret: ${env:PRISMA_SECRET}
 
 # the file path pointing to your data model
 datamodel:

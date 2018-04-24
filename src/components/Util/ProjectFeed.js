@@ -1,34 +1,34 @@
 import React, {Component, Fragment} from 'react';
-import { Query } from 'react-apollo';
+import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
-import { ProjectLink } from '../Layouts/';
+import {ProjectLink} from '../Layouts/';
 
 export default class ProjectFeed extends Component {
   render() {
     return (
       <Query query={FEED_QUERY}>
-        {({ data, loading, error, refetch }) => {
+        {({data, loading, error, refetch}) => {
           if (loading) {
             return (
-              <div >
+              <div>
                 <div>Loading ...</div>
               </div>
-            )
+            );
           }
 
           if (error) {
             return (
-              <div >
+              <div>
                 <div>An unexpected error occured.</div>
               </div>
-            )
+            );
           }
 
           return (
             <Fragment>
               <h1>Feed</h1>
-              {data.projects &&
-                data.projects.map(project => (
+              {data.feed &&
+                data.feed.map(project => (
                   <ProjectLink
                     key={project.id}
                     project={project}
@@ -38,16 +38,16 @@ export default class ProjectFeed extends Component {
                 ))}
               {this.props.children}
             </Fragment>
-          )
+          );
         }}
       </Query>
-    )
+    );
   }
 }
 
 export const FEED_QUERY = gql`
-  query FeedQuery {
-    projects {
+  {
+    feed {
       id
       createdAt
       updatedAt
@@ -63,4 +63,4 @@ export const FEED_QUERY = gql`
       }
     }
   }
- `
+`;

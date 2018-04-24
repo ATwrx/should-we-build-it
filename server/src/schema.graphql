@@ -1,3 +1,4 @@
+# import Node from "./generated/prisma.graphql"
 # import Project from "./generated/prisma.graphql"
 
 type Query {
@@ -12,8 +13,8 @@ type Mutation {
   signup(name: String!, password: String!, email: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   createDraft(title: String!, description: String!,  text: String!, ): Project!
-  deleteProject(id: ID!): Project!
-  publish(id: ID!): Project!
+  deleteProject(id: ID!): Node!
+  publish(id: ID!): Node!
 }
 
 type Subscription {

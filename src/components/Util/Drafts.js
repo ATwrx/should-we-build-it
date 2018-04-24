@@ -1,36 +1,35 @@
-import React, { Component, Fragment } from 'react'
-import Post from '../components/Post'
-import { Query } from 'react-apollo'
-import  { gql } from 'apollo-boost'
+import React, {Component, Fragment} from 'react';
+import {Query} from 'react-apollo';
+import gql from 'graphql-tag';
+import {Header, Loader} from 'semantic-ui-react';
+import {ProjectItem} from '../Layouts';
 
-export default class DraftsPage extends Component {
+export default class Drafts extends Component {
   render() {
     return (
       <Query query={DRAFTS_QUERY}>
-        {({ data, loading, error, refetch }) => {
+        {({data, loading, error, refetch}) => {
           if (loading) {
             return (
-              <div className="flex w-100 h-100 items-center justify-center pt7">
-                <div>Loading ...</div>
-              </div>
-            )
+              <Fragment>
+                <Loader>Loading ...</Loader>
+              </Fragment>
+            );
           }
 
           if (error) {
             return (
-              <div className="flex w-100 h-100 items-center justify-center pt7">
+              <Fragment>
                 <div>An unexpected error occured.</div>
-              </div>
-            )
+              </Fragment>
+            );
           }
           return (
             <Fragment>
-              <div className="flex justify-between items-center">
-                <h1>Drafts</h1>
-              </div>
+              <Header as="h1">Drafts</Header>
               {data.drafts &&
                 data.drafts.map(draft => (
-                  <Post
+                  <ProjectItem
                     key={draft.id}
                     post={draft}
                     refresh={() => refetch()}
@@ -39,15 +38,15 @@ export default class DraftsPage extends Component {
                 ))}
               {this.props.children}
             </Fragment>
-          )
+          );
         }}
       </Query>
-    )
+    );
   }
 }
 
 export const DRAFTS_QUERY = gql`
-  query DraftsQuery {
+  {
     drafts {
       id
       text
@@ -55,4 +54,4 @@ export const DRAFTS_QUERY = gql`
       isPublished
     }
   }
-`
+`;
