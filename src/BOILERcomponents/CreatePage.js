@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import  { gql } from 'apollo-boost'
-import { DRAFTS_QUERY } from './DraftsPage'
+import { CREATE_DRAFT, DRAFTS_QUERY } from '../constants/gql'
 
 class CreatePage extends Component {
   state = {
@@ -13,7 +13,7 @@ class CreatePage extends Component {
   render() {
     return (
       <Mutation
-        mutation={CREATE_DRAFT_MUTATION}
+        mutation={CREATE_DRAFT}
         update={(cache, { data }) => {
           const { drafts } = cache.readQuery({ query: DRAFTS_QUERY })
           cache.writeQuery({
@@ -70,17 +70,8 @@ class CreatePage extends Component {
       </Mutation>
     )
   }
-
 }
 
-const CREATE_DRAFT_MUTATION = gql`
-  mutation CreateDraftMutation($title: String!, $text: String!) {
-    createDraft(title: $title, text: $text) {
-      id
-      title
-      text
-    }
-  }
-`
+
 
 export default withRouter(CreatePage)

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Container, Menu} from 'semantic-ui-react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 
 class TitleBar extends Component {
   render() {
     return (
-      <Menu fluid>
-        <Menu.Item as={NavLink} to="/" header color="blue">
+      <Menu fluid pointing>
+        <Menu.Item as={Link} to="/" header color="blue">
           Should We Build It?
         </Menu.Item>
 

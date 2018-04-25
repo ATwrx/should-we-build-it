@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import gql from 'graphql-tag'
 import {Grid, Segment, Form, TextArea, Button} from 'semantic-ui-react';
 
 class ProjectForm extends Component {

@@ -1,8 +1,10 @@
 import React, {Component, Fragment} from 'react';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
-import {Header, Loader} from 'semantic-ui-react';
+import {Header, Loader, Segment} from 'semantic-ui-react';
 import {ProjectItem} from '../Layouts';
+
+
 
 export default class Drafts extends Component {
   render() {
@@ -12,21 +14,19 @@ export default class Drafts extends Component {
           if (loading) {
             return (
               <Fragment>
-                <Loader>Loading ...</Loader>
+                <Loader active>Loading ...</Loader>
               </Fragment>
             );
           }
 
           if (error) {
             return (
-              <Fragment>
-                <div>An unexpected error occured.</div>
-              </Fragment>
+                <Segment color="red">An unexpected error occured.</Segment>
             );
           }
           return (
             <Fragment>
-              <Header as="h1">Drafts</Header>
+              <Header as="h1" content="Drafts" />
               {data.drafts &&
                 data.drafts.map(draft => (
                   <ProjectItem

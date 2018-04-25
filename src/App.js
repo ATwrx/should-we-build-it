@@ -6,15 +6,19 @@ import {TitleBar, Welcome, Profile, ProjectItem, } from './components/Layouts';
 
 class App extends Component {
   state = {
-    isUser: false,
+    isUser: , 
+  };
+
+  handleUserLogin = e => {
+    ''
   };
 
   render() {
     return (
       <Router>
         <Container fluid>
-              <TitleBar />
-              <Container style={{padding: '5em 0em'}}>
+              <TitleBar user={this.state.user}/>
+              <Container style={{padding: '0em 2em'}}>
               <Switch >
                 {/* <Route path="/" component={Welcome} /> */}
                 <Route path="/explore" component={ProjectFeed} />

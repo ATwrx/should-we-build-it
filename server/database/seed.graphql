@@ -1,5 +1,5 @@
 mutation {
-  createUser(data: {
+  createAdmin: createUser(data: {
     name: "admin"
     email: "act.webdesigns@gmail.com"
     password: "dishrag25"
@@ -7,6 +7,7 @@ mutation {
   }){
     id
     name
+    email
   }
 
 testUserOne: createUser(data: {
@@ -16,6 +17,7 @@ testUserOne: createUser(data: {
   }) {
     id
     name
+    email
   }
   
   testUserTwo: createUser(data: {
@@ -25,11 +27,22 @@ testUserOne: createUser(data: {
   }) {
     id
     name
+    email
   }  
+
+  testUserThree: createUser(data: {
+    name: "Mr. Crawley"
+    email: "ozzy@rocks.com" 
+    password: "blacksabbath"
+  }) {
+    id
+    name
+    email
+  }
   testProjectOne: createProject(data: {
     title: "Decentrilized Sandwich Delivery (Mobile App)"
-    text: "Blockchain Sandwich Delivery. Is it a good idea? No, but it is a blockchain. "
-    description: "BS Delivery's blockchain is tamper-proof because no one knows how it works. It's decentrilized because I found the instructions on the Dark Web and I don't actually know what it connects to. Step One: Make a sandwich. Step Two: Add your address to the blockchain. Step Three: Mail your sandwich to the address that the blockchain will email to you. Your sandwich from somewere will then be promptly made by someone who will then mail it to you at some point in the future. Pros: The feds will never know who makes your sandwiches. There is a chance of receiving many sandwiches. Cons: You will never know who makes your sandwiches. There is a chance of receiving no sandwiches. Welcome to the future."
+    description: "Blockchain Sandwich Delivery. Is it a good idea? No, but it is a blockchain. "
+    text: "BS Delivery's blockchain is tamper-proof because no one knows how it works. It's decentrilized because I found the instructions on the Dark Web and I don't actually know what it connects to. Step One: Make a sandwich. Step Two: Add your address to the blockchain. Step Three: Mail your sandwich to the address that the blockchain will email to you. Your sandwich from somewere will then be promptly made by someone who will then mail it to you at some point in the future. Pros: The feds will never know who makes your sandwiches. There is a chance of receiving many sandwiches. Cons: You will never know who makes your sandwiches. There is a chance of receiving no sandwiches. Welcome to the future."
     isPublished: true
     owner: {
       connect: {
@@ -39,6 +52,23 @@ testUserOne: createUser(data: {
   }) {
     id
     title
+    owner{
+      id
+      name
+    }
+  }
+  testProjectTwo: createProject(data: {
+    title: "Virtual Tour of the Alamo (VR App)" 
+    text: "For people that can't make it into Texas to see the real thing,"
+  	description: "Not everyone is able to visit Texas. I mean the Alamo..."
+    isPublished: true
+    owner: {
+      connect: {
+        name: "Mr. Crawley"
+      }
+    }
+  }) {
+    id
     owner{
       id
       name
