@@ -1,0 +1,6 @@
+projects:
+  swbi:
+    schemaPath: database/datamodal.graphql
+    extensions:
+      endpoints:
+        dev: 'http://localhost:4466/swbi/dev'

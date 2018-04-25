@@ -6,11 +6,11 @@ import {TitleBar, Welcome, Profile, ProjectItem, } from './components/Layouts';
 
 class App extends Component {
   state = {
-    isUser: , 
+    isUser: false,
   };
 
   handleUserLogin = e => {
-    ''
+     ''
   };
 
   render() {

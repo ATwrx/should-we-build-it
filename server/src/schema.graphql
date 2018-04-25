@@ -1,5 +1,5 @@
-# import Node from "./generated/prisma.graphql"
-# import Project from "./generated/prisma.graphql"
+# import Node from "./schema/prisma.graphql"
+# import Project from "./schema/prisma.graphql"
 
 type Query {
   feed: [Project!]!
@@ -10,7 +10,7 @@ type Query {
 }
 
 type Mutation {
-  signup(name: String!, password: String!, email: String!): AuthPayload!
+  signUp(name: String!, password: String!, email: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   createDraft(title: String!, description: String!,  text: String!, ): Project!
   deleteProject(id: ID!): Node!

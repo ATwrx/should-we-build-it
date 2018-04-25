@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; //eslint-disable-next-line
-import dotenv from 'dotenv/config';
 import {ApolloProvider} from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -25,7 +24,7 @@ const client = new ApolloClient({
     new HttpLink({
       uri: 'http://localhost:4000',
       credentials: 'same-origin',
-      secret: 'swbisecret',
+      secret: process.env.PRISMA_MANAGEMENT_API_SECRET,
     })
   ]),
   cache: new InMemoryCache(),
