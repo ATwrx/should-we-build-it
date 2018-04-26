@@ -1,10 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import {Query} from 'react-apollo';
 import {Header, Loader} from 'semantic-ui-react';
-import {FEED_QUERY}from '../Constants/queries'
-import {ProjectLink, } from '../Layouts/';
 
-export default class ProjectFeed extends Component {
+import {ProjectLink, } from '../Layouts/';
+import {FEED_QUERY} from '../Constants/queries'
+
+export default class ProjectPage extends Component {
   render() {
     return (
       <Query query={FEED_QUERY}>

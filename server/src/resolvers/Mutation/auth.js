@@ -7,9 +7,8 @@ const auth = {
     const user = await ctx.db.mutation.createUser({
       data: { ...args, password },
     })
-
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      token: jwt.sign({ userId: user.id }, "atlassian"), // <-- was APP_SECRET
       user,
     }
   },
@@ -26,7 +25,7 @@ const auth = {
     }
 
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      token: jwt.sign({ userId: user.id }, "atlassian"), // <-- was APP_SECRET
       user,
     }
   },

@@ -10,7 +10,7 @@ const server = new GraphQLServer({
     db: new Prisma({
       typeDefs: 'src/schema/prisma.graphql',
       endpoint: 'http://localhost:4466/swbi/dev',
-      secret: process.env.PRISMA_MANAGEMENT_API_SECRET,
+      secret: 'atlassian',
       debug: true,
     }),
   }),

@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {Query} from 'react-apollo';
-import gql from 'graphql-tag';
 import {Header, Loader, Segment} from 'semantic-ui-react';
 import {ProjectItem} from '../Layouts';
+
+import {DRAFTS_QUERY} from '../Constants/queries';
 
 
 
@@ -45,13 +46,4 @@ export default class Drafts extends Component {
   }
 }
 
-export const DRAFTS_QUERY = gql`
-  {
-    drafts {
-      id
-      text
-      title
-      isPublished
-    }
-  }
-`;
+

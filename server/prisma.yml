@@ -3,6 +3,7 @@ datamodel:
   - database/datamodel.graphql
   - database/enums.graphql
 
+secret: atlassian
 seed:
   import: database/seed.graphql
 

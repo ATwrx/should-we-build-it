@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'; //eslint-disable-next-line
 import {Container, Menu} from 'semantic-ui-react';
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom'; //eslint-disable-next-line
+import {NavLoginButton} from '../Util'
+          // <NavLoginButton />
 
 class TitleBar extends Component {
   render() {
@@ -14,19 +16,15 @@ class TitleBar extends Component {
           Explore
         </Menu.Item>
 
-        <Menu.Item as={NavLink} to="/add-project">
+        <Menu.Item as={NavLink} to="/drafts">
           Add Project
         </Menu.Item>
 
         <Menu.Item as={NavLink} to="/profile">
           Profile
         </Menu.Item>
-
-        <Menu.Menu position="right">
-          <Menu.Item as={NavLink} to="/login">
-            {' '}
-            Login
-          </Menu.Item>
+        
+        <Menu.Menu position='right'>
         </Menu.Menu>
       </Menu>
     );

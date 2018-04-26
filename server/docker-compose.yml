@@ -11,7 +11,7 @@ services:
         databases:
           default:
             connector: mysql
-            managementApiSecret: admin-secrets-are-best
+            managementApiSecret: atlassian
             active: true
             host: db
             port: 3306

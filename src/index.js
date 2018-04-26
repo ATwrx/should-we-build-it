@@ -1,41 +1,69 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; //eslint-disable-next-line
-import {ApolloProvider} from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
+import {ApolloProvider} from 'react-apollo'; //eslint-disable-next-line
+import {ApolloClient} from 'apollo-client'; //eslint-disable-next-line
+import {HttpLink} from 'apollo-link-http'; //eslint-disable-next-line
+import {InMemoryCache} from 'apollo-cache-inmemory'; //eslint-disable-next-line
+import {WebSocketLink} from 'apollo-link-ws'; //eslint-disable-next-line
+import {getMainDefinition} from 'apollo-utilities';
+import {ApolloLink, split} from 'apollo-link'; //eslint-disable-next-line
+
+import {AUTH_TOKEN} from './constant';
 import App from './App';
+const secret = 'atlassian';
 
-
-
-const client = new ApolloClient({
-  link: ApolloLink.from([
-    onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors)
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          ),
-        );
-      if (networkError) console.log(`[Network error]: ${networkError}`);
-    }),
-    new HttpLink({
-      uri: 'http://localhost:4000',
-      credentials: 'same-origin',
-      secret: process.env.PRISMA_MANAGEMENT_API_SECRET,
-    })
-  ]),
-  cache: new InMemoryCache(),
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000',
+  credentials: 'same-origin',
+  connectToDevTools: true,
 });
 
+const middlewareLink = new ApolloLink((operation, forward) => {
+  // get the authentication token from local storage if it exists
+  const tokenValue = localStorage.getItem(AUTH_TOKEN);
+  // return the headers to the context so httpLink can read them
+  operation.setContext({
+    headers: {
+      Authorization: tokenValue ? `Bearer ${tokenValue}` : '',
+    },
+  });
+  return forward(operation);
+});
 
+// authenticated httplink
+const httpLinkAuth = middlewareLink.concat(httpLink);
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:4000`,
+  options: {
+    reconnect: true,
+    connectionParams: {
+      Authorization: `Bearer ${localStorage.getItem(AUTH_TOKEN)}`,
+    },
+  },
+});
 
+const link = split(
+  // split based on operation type
+  ({query}) => {
+    const {kind, operation} = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  httpLinkAuth,
+);
+
+const client = new ApolloClient({
+  link: ApolloLink.from([link]),
+  cache: new InMemoryCache(),
+  secret,
+  connectToDevTools: true,
+});
+
+const token = localStorage.getItem(AUTH_TOKEN);
 
 const ApolloApp = () => (
   <ApolloProvider client={client}>
-    <App />
+    <App token={token} />
   </ApolloProvider>
 );
 
